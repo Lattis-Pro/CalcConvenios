@@ -221,7 +221,7 @@
     <!-- Cintillo Superior Oficial BCP -->
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-pink-700 text-white text-[11px] font-semibold py-1.5 px-4 text-center tracking-wide flex justify-center items-center gap-2 shadow-inner">
       <span>✨ Alianza Oficial Convenios Públicos | Camargo Group</span>
-      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 28.10.2026</span>
+      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 03.11.2026</span>
     </div>
 
     <!-- Header Principal -->
@@ -579,7 +579,7 @@
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.03 Oficial (28.10.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.06 Oficial (03.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -730,548 +730,550 @@
       }
 
       // 3. MATRIZ OFICIAL DE CONVENIOS (Actualizada de Desprotegido_Nuevo_simulador.xlsx)
-      const CONVENIOS_DATA = Object.freeze([
+      const CONVENIOS_DATA = Object.freeze(
+[
         {
-          "name": "AGRORURAL",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.12
+                "name": "AGRORURAL",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.12
         },
         {
-          "name": "ANA",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.109
+                "name": "ANA",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.109
         },
         {
-          "name": "CHAVIMOCHIC",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "CHAVIMOCHIC",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "DIRIS_Lima_Centro",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 31,
-          "venc": 15,
-          "reserva": 50,
-          "tea": 0.1099
+                "name": "DIRIS_Lima_Centro",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 31,
+                "venc": 15,
+                "reserva": 50,
+                "tea": 0.1099
         },
         {
-          "name": "DIRIS_Lima_Este",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.45,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "DIRIS_Lima_Este",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.45,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "DIRIS_Lima_Norte",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.45,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 50,
-          "tea": 0.1089
+                "name": "DIRIS_Lima_Norte",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.45,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 50,
+                "tea": 0.1089
         },
         {
-          "name": "DIRESA_Cajamarca",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.103
+                "name": "DIRESA_Cajamarca",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.103
         },
         {
-          "name": "DIRESA_Loreto",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "DIRESA_Loreto",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "Ejército_del_Perú",
-          "pgBase": 2,
-          "pfBase": 3,
-          "rci": 0.47,
-          "corte": 30,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.109
+                "name": "Ejército_del_Perú",
+                "pgBase": 2,
+                "pfBase": 3,
+                "rci": 0.47,
+                "corte": 30,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.109
         },
         {
-          "name": "EPSEL",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.115
+                "name": "EPSEL",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.115
         },
         {
-          "name": "Fuerza_Aerea_del_Perú",
-          "pgBase": 2,
-          "pfBase": 3,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 17,
-          "reserva": 35,
-          "tea": 0.111
+                "name": "Fuerza_Aerea_del_Perú",
+                "pgBase": 2,
+                "pfBase": 3,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 17,
+                "reserva": 35,
+                "tea": 0.111
         },
         {
-          "name": "GERESA_La_Libertad",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "GERESA_La_Libertad",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "Gobierno_Regional_Loreto",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "Gobierno_Regional_Loreto",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "Gobierno_Regional_Piura",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 100,
-          "tea": 0.115
+                "name": "Gobierno_Regional_Piura",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 100,
+                "tea": 0.115
         },
         {
-          "name": "GSR_Luciano_Castillo",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "GSR_Luciano_Castillo",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "Hospital_Cajamarca",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "Hospital_Cajamarca",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.105
         },
         {
-          "name": "Hospital_Chulucanas",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "Hospital_Chulucanas",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "Hospital_de_apoyo_Iquitos",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "Hospital_de_apoyo_Iquitos",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "Hospital_de_la_Amistad",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.118
+                "name": "Hospital_de_la_Amistad",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.118
         },
         {
-          "name": "Hospital_E_G_Barron",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.104
+                "name": "Hospital_E_G_Barron",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.104
         },
         {
-          "name": "Hospital_Goyeneche",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 18,
-          "reserva": 100,
-          "tea": 0.108
+                "name": "Hospital_Goyeneche",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 18,
+                "reserva": 100,
+                "tea": 0.108
         },
         {
-          "name": "Hospital_JAMO",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "Hospital_JAMO",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "Hospital_la_Caleta",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.104
+                "name": "Hospital_la_Caleta",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.104
         },
         {
-          "name": "Hospital_Regional_Lambayeque",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "Hospital_Regional_Lambayeque",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "Hospital_Regional_Loreto",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.1089
+                "name": "Hospital_Regional_Loreto",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.1089
         },
         {
-          "name": "Hospital_San_Bartolome",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.12
+                "name": "Hospital_San_Bartolome",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.12
         },
         {
-          "name": "Hospital_Sullana",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "Hospital_Sullana",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "Hospital_Trujillo",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 20,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "Hospital_Trujillo",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 20,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "INSN",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.12
+                "name": "INSN",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.12
         },
         {
-          "name": "Marina_de_Guerra",
-          "pgBase": 2,
-          "pfBase": 3,
-          "rci": 0.5,
-          "corte": 4,
-          "venc": 15,
-          "reserva": 100,
-          "tea": 0.106
+                "name": "Marina_de_Guerra",
+                "pgBase": 2,
+                "pfBase": 3,
+                "rci": 0.5,
+                "corte": 4,
+                "venc": 15,
+                "reserva": 100,
+                "tea": 0.106
         },
         {
-          "name": "Ministerio_Defensa",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.13
+                "name": "Ministerio_Defensa",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.13
         },
         {
-          "name": "Ministerio_Justicia",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.1089
+                "name": "Ministerio_Justicia",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.1089
         },
         {
-          "name": "Ministerio_Vivienda",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.115
+                "name": "Ministerio_Vivienda",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.115
         },
         {
-          "name": "Ministerio_Publico",
-          "pgBase": 2,
-          "pfBase": 3,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.107
+                "name": "Ministerio_Publico",
+                "pgBase": 2,
+                "pfBase": 3,
+                "rci": 0.5,
+                "corte": 31,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.107
         },
         {
-          "name": "Mun_Cerro_Colorado",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.1149
+                "name": "Mun_Cerro_Colorado",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.1149
         },
         {
-          "name": "Municipalidad_Piura",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.117
+                "name": "Municipalidad_Piura",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.117
         },
         {
-          "name": "ONPE",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 30,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.13
+                "name": "ONPE",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 30,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.13
         },
         {
-          "name": "Policia_Nacional_del_Perú",
-          "pgBase": 2,
-          "pfBase": 3,
-          "rci": 0.45,
-          "corte": 4,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.1085
+                "name": "Policia_Nacional_del_Perú",
+                "pgBase": 2,
+                "pfBase": 3,
+                "rci": 0.45,
+                "corte": 4,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.1085
         },
         {
-          "name": "PRONABEC",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.15
+                "name": "PRONABEC",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.15
         },
         {
-          "name": "PRONACEJ",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.115
+                "name": "PRONACEJ",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.115
         },
         {
-          "name": "REDIS_Chepen",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.104
+                "name": "REDIS_Chepen",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.104
         },
         {
-          "name": "Red_Salud_APLAO",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "Red_Salud_APLAO",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "RED_Salud_Arequipa_Caylloma",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "RED_Salud_Arequipa_Caylloma",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.105
         },
         {
-          "name": "Red_Salud_Pacífico_Norte",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "Red_Salud_Pacífico_Norte",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.105
         },
         {
-          "name": "Red_Salud_Pacífico_Sur",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "Red_Salud_Pacífico_Sur",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.105
         },
         {
-          "name": "RENIEC",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 10,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "RENIEC",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 10,
+                "reserva": 0,
+                "tea": 0.105
         },
         {
-          "name": "SENASA",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.47,
-          "corte": 30,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.112
+                "name": "SENASA",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.47,
+                "corte": 31,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.112
         },
         {
-          "name": "U_San_Juan_Bautista",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.3,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.117
+                "name": "U_San_Juan_Bautista",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.3,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.117
         },
         {
-          "name": "UE403_Morropon",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 23,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.109
+                "name": "UE403_Morropon",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 23,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.109
         },
         {
-          "name": "UESA_413_Ascope",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.104
+                "name": "UESA_413_Ascope",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.104
         },
         {
-          "name": "UESA_406_Sanchez_Carrion",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.104
+                "name": "UESA_406_Sanchez_Carrion",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.104
         },
         {
-          "name": "UE_Salud_Cajamarca",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 17,
-          "reserva": 0,
-          "tea": 0.108
+                "name": "UE_Salud_Cajamarca",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 17,
+                "reserva": 0,
+                "tea": 0.108
         },
         {
-          "name": "UNAP",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 25,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.11
+                "name": "UNAP",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 25,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.11
         },
         {
-          "name": "UTES_N6",
-          "pgBase": 1,
-          "pfBase": 2,
-          "rci": 0.5,
-          "corte": 24,
-          "venc": 15,
-          "reserva": 0,
-          "tea": 0.105
+                "name": "UTES_N6",
+                "pgBase": 1,
+                "pfBase": 2,
+                "rci": 0.5,
+                "corte": 24,
+                "venc": 15,
+                "reserva": 0,
+                "tea": 0.105
         }
-      ]);
+]
+      );
 
       const CARGOS_POR_CONVENIO = Object.freeze({
         "Ejército_del_Perú": [
@@ -1897,7 +1899,7 @@
         let rci = conv.rci;
         if (convNombre === "Policia_Nacional_del_Perú") {
           if (cargo === "Sub Oficial de Tercera menor a 55 años") rci = 0.30;
-          else if (cargo === "Sub Oficial de Tercera") rci = 0.40;
+          else if (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda") rci = 0.40;
           else rci = 0.45;
         } else if (convNombre === "UE_Salud_Cajamarca") {
           rci = 0.47;
@@ -1939,7 +1941,7 @@
         let rciL13 = conv.rci;
         if (["DIRIS_Lima_Norte", "DIRIS_Lima_Centro", "DIRIS_Lima_Este", "INSN"].includes(convNombre) && cargo.includes("CAS")) rciL13 = 0.40;
         else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || (convNombre === "Hospital_Sullana" && (cargo.includes("Nombrados") || cargo.includes("Indeterminados")))) rciL13 = 0.45;
-        else if (convNombre === "Policia_Nacional_del_Perú" && cargo === "Sub Oficial de Tercera") rciL13 = 0.40;
+        else if (convNombre === "Policia_Nacional_del_Perú" && (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda")) rciL13 = 0.40;
         else if (convNombre === "Policia_Nacional_del_Perú" && cargo === "Sub Oficial de Tercera menor a 55 años") rciL13 = 0.30;
         else if (convNombre === "UE_Salud_Cajamarca") rciL13 = 0.47;
 
@@ -2252,7 +2254,7 @@
       window.exportarExcelResultados = function() {
         if (datosEvaluadosMasivos.length === 0) {
           alert("Primero carga un archivo o genera datos para exportar.");
-          return;
+          return
         }
         const ws = XLSX.utils.json_to_sheet(datosEvaluadosMasivos);
         const wb = XLSX.utils.book_new();
@@ -2264,3 +2266,4 @@
   </script>
 </body>
 </html>
+Mostrando Simulador_Convenios_Actualizado_v3.05.html.
