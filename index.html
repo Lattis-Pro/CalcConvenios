@@ -212,12 +212,179 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-card { animation: fadeInUp 0.35s ease-out forwards; }
+
+    /* ================= ESTILOS DEL FORMATO EXACTO CRONOGRAMA BCP (cromo_page-0001.jpg) ================= */
+    .bcp-cron-sheet {
+      background: #ffffff;
+      color: #000000;
+      font-family: Calibri, Arial, Helvetica, sans-serif;
+      padding: 15px 25px;
+    }
+    .bcp-cron-title {
+      color: #E86C3A;
+      font-size: 11pt;
+      font-weight: 700;
+      border-bottom: 1.5px solid #2b4c7e;
+      padding-bottom: 2px;
+      margin-bottom: 2px;
+    }
+    .bcp-cron-notes {
+      font-size: 6.8pt;
+      line-height: 1.25;
+      color: #111111;
+      margin-bottom: 8px;
+    }
+    .bcp-cron-rates {
+      font-size: 6.8pt;
+      width: 310px;
+      margin-left: 16px;
+      margin-bottom: 8px;
+    }
+    .bcp-cron-rates-row {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .bcp-cron-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 6.2pt;
+      table-layout: fixed;
+    }
+    .bcp-cron-table th {
+      background-color: #E86C3A !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      text-align: center;
+      vertical-align: middle;
+      padding: 3px 2px;
+      border: 0.5px solid #ffffff;
+      line-height: 1.05;
+    }
+    .bcp-cron-table td {
+      padding: 1.1px 3px;
+      border: 0.5px solid #f2d7bd;
+      color: #000000;
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 1.08;
+    }
+    .bcp-row-totales td {
+      background-color: #FCE4D6 !important;
+      font-weight: 700;
+      padding: 3px 3px !important;
+      border-top: 1px solid #E86C3A;
+      border-bottom: 1px solid #E86C3A;
+    }
+    .bcp-row-even td {
+      background-color: #FDF2E9 !important;
+    }
+    .bcp-row-odd td {
+      background-color: #FAE5D3 !important;
+    }
+    .cell-curr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    .cell-curr span:first-child {
+      padding-right: 2px;
+    }
+
+    /* ================= CONFIGURACIÓN DE IMPRESIÓN (2 HOJAS A4) ================= */
+    #printWrapper {
+      display: none;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      #appContent, footer, #camarguitoContainer, #modalCamarguito {
+        display: none !important;
+      }
+
+      #printWrapper {
+        display: block !important;
+        width: 210mm !important;
+        margin: 0 auto !important;
+      }
+
+      /* HOJA 1: FICHA EVALUACIÓN (sad_page-0001.jpg) */
+      .print-page-1 {
+        position: relative !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      #printImgBg {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: fill !important;
+        z-index: 1 !important;
+      }
+
+      #printOverlayFields {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 2 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        color: #0b1a3d !important;
+      }
+
+      .p-field {
+        position: absolute !important;
+        font-size: 8.5pt !important;
+        font-weight: 700 !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+      }
+
+      /* HOJA 2: CRONOGRAMA MODELO EXACTO (cromo_page-0001.jpg)
+         Antes: height:297mm + overflow:hidden recortaba las cuotas finales (cortaba en la cuota 67 de 72)
+         mientras "Totales a pagar" sí las incluía. Ahora nada se oculta: el alto es automático y las
+         filas se compactan para que las 72 cuotas + gracia quepan en un A4. */
+      .print-page-2 {
+        position: relative !important;
+        width: 210mm !important;
+        height: auto !important;
+        padding: 7mm 12mm 5mm 12mm !important;
+        box-sizing: border-box !important;
+        background: #ffffff !important;
+        overflow: visible !important;
+      }
+      .print-page-2 .bcp-cron-sheet { padding: 0 !important; }
+      .print-page-2 .bcp-cron-table td { padding: 0.55px 3px !important; line-height: 1.0 !important; }
+      .print-page-2 .bcp-cron-table tr { break-inside: avoid !important; page-break-inside: avoid !important; }
+    }
   </style>
 </head>
 <body class="bg-[#F4F7FC] dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between" oncontextmenu="return false;">
 
   <!-- Contenedor Principal -->
-  <div>
+  <div id="appContent">
     <!-- Cintillo Superior Oficial BCP -->
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-pink-700 text-white text-[11px] font-semibold py-1.5 px-4 text-center tracking-wide flex justify-center items-center gap-2 shadow-inner">
       <span>✨ Alianza Oficial Convenios Públicos | Camargo Group</span>
@@ -246,17 +413,17 @@
           <span class="text-slate-300 dark:text-slate-700 font-light text-xl">×</span>
 
           <div class="bcp-badge-3d select-none cursor-pointer" title="Canal Oficial BCP Convenios">
-            <img src="data:image/png;base64,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" alt="BCP" class="bcp-logo-img">
+            <img id="headerBcpLogo" src="data:image/png;base64,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" alt="BCP" class="bcp-logo-img">
           </div>
 
-          <div class="ml-3 pl-3 border-l border-slate-200 dark:border-slate-800 hidden md:block">
+          <div class="ml-3 pl-3 border-l border-slate-200 dark:border-slate-800 hidden xl:block">
             <span class="text-xs font-bold text-[#002A8F] dark:text-blue-400 block">Evaluador Oficial de Convenios</span>
             <span class="text-[10px] text-slate-400 dark:text-slate-500">Canal Certificado 2026</span>
           </div>
         </div>
 
         <!-- Selector de Pestañas, Dark Mode Toggle y Autoría -->
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-2.5">
           <button id="btnDarkMode" onclick="toggleDarkMode()" class="p-2 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:scale-105 transition-all text-xs flex items-center justify-center w-8 h-8" title="Alternar Modo Oscuro / Claro">
             <i id="darkIcon" class="fa-solid fa-moon"></i>
           </button>
@@ -267,10 +434,13 @@
           </div>
 
           <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-full border border-slate-200 dark:border-slate-700">
-            <button id="btnTabSimulador" onclick="switchTab('simulador')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#002A8F] text-white shadow-sm transition-all duration-200 flex items-center">
+            <button id="btnTabSimulador" onclick="switchTab('simulador')" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#002A8F] text-white shadow-sm transition-all duration-200 flex items-center">
               <i class="fa-solid fa-calculator mr-1.5 text-orange-400"></i> Individual
             </button>
-            <button id="btnTabMasivo" onclick="switchTab('masivo')" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center">
+            <button id="btnTabCronograma" onclick="switchTab('cronograma')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center">
+              <i class="fa-solid fa-table-list mr-1.5 text-orange-500"></i> Cronograma BCP
+            </button>
+            <button id="btnTabMasivo" onclick="switchTab('masivo')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center">
               <i class="fa-solid fa-file-excel mr-1.5 text-emerald-600 dark:text-emerald-400"></i> Masivo (Excel)
             </button>
           </div>
@@ -286,7 +456,24 @@
           <h2 class="text-lg md:text-xl font-black text-[#002A8F] dark:text-blue-400 tracking-tight">Evaluación y Simulación Oficial de Convenios</h2>
           <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Calcula con precisión cronograma financiero BCP, cuotas con periodo de gracia y capacidad de pago.</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Botón Cargar Plantilla Hoja 1 -->
+          <input type="file" id="inpCargarPlantilla" accept="image/*" class="hidden" onchange="subirImagenPlantilla(event)">
+          <button onclick="document.getElementById('inpCargarPlantilla').click()" class="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold px-3.5 py-2 rounded-full flex items-center gap-1.5 shadow-sm transition-all" title="La plantilla se carga sola desde el enlace; usa este botón solo para reemplazarla por otra imagen">
+            <i class="fa-solid fa-image text-blue-600 dark:text-blue-400"></i>
+            <span id="txtBtnPlantilla">Plantilla Base</span>
+          </button>
+
+          <!-- Botón Imprimir Ficha + Cronograma -->
+          <button onclick="imprimirFichaOficial()" class="bg-[#002A8F] hover:bg-[#001B5E] text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm transition-all" title="Imprimir Hoja 1 (Ficha) y Hoja 2 (Cronograma Oficial)">
+            <i class="fa-solid fa-print text-orange-400"></i> Imprimir Ficha + Cronograma
+          </button>
+
+          <!-- Botón de Limpieza Agregado -->
+          <button onclick="limpiarCampos()" class="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm transition-all" title="Limpiar todos los datos ingresados">
+            <i class="fa-solid fa-rotate-left text-slate-500 dark:text-slate-400"></i> Limpiar
+          </button>
+
           <button onclick="abrirCamarguitoManual()" class="btn-bcp-orange text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-comments"></i> Consejos de Camarguito
           </button>
@@ -436,11 +623,14 @@
 
           <!-- Condiciones del Préstamo -->
           <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 hover:shadow-md transition duration-300 animate-card">
-            <h2 class="text-sm font-bold text-[#002A8F] dark:text-blue-400 mb-3 flex items-center">
-              <i class="fa-solid fa-hand-holding-dollar text-[#FF7800] mr-2 text-base"></i> Condiciones del Préstamo Solicitado
-            </h2>
+            <div class="flex justify-between items-center mb-3">
+              <h2 class="text-sm font-bold text-[#002A8F] dark:text-blue-400 flex items-center">
+                <i class="fa-solid fa-hand-holding-dollar text-[#FF7800] mr-2 text-base"></i> Condiciones del Préstamo Solicitado
+              </h2>
+              <span class="text-xs text-slate-500 dark:text-slate-400">1er Venc.: <strong id="lblPrimerVencUI" class="text-[#002A8F] dark:text-blue-400">17/12/2026</strong> | TCEA: <strong id="lblTCEAUI" class="text-[#FF7800]">12.31%</strong></span>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-6 gap-3 text-xs">
               <div>
                 <label class="block font-semibold text-slate-600 dark:text-slate-300">Monto Solicitado</label>
                 <input type="number" id="inpMonto" value="66900" step="100" class="w-full mt-1 p-2 border border-blue-200 dark:border-blue-900/60 rounded-xl font-bold text-[#002A8F] dark:text-blue-400 bg-blue-50/40 dark:bg-blue-950/30 focus:ring-2 focus:ring-[#002A8F] dark:focus:ring-blue-500">
@@ -466,6 +656,14 @@
               <div>
                 <label class="block font-semibold text-slate-600 dark:text-slate-300">Desembolso</label>
                 <input type="date" id="inpFechaDesembolso" value="2026-10-07" class="w-full mt-1 p-2 border border-slate-300 dark:border-slate-700 rounded-xl text-xs bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#002A8F] dark:focus:ring-blue-500">
+              </div>
+
+              <div>
+                <label class="block font-semibold text-slate-600 dark:text-slate-300">Estado Cuenta</label>
+                <select id="selEnvioCta" class="w-full mt-1 p-2 border border-slate-300 dark:border-slate-700 rounded-xl text-xs bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#002A8F] dark:focus:ring-blue-500">
+                  <option value="0" selected>Virtual (S/ -)</option>
+                  <option value="10.00">Físico (S/ 10.00)</option>
+                </select>
               </div>
 
               <div>
@@ -524,7 +722,24 @@
 
       </div>
 
-      <!-- ================= TAB 2: EVALUACIÓN MASIVA ================= -->
+      <!-- ================= TAB 2: CRONOGRAMA OFICIAL BCP (MODELO EXACTO cromo_page-0001.jpg) ================= -->
+      <div id="tabCronograma" class="hidden space-y-5">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+          <div>
+            <h2 class="text-sm font-bold text-[#002A8F] dark:text-blue-400 flex items-center">
+              <i class="fa-solid fa-table-list text-[#FF7800] mr-2"></i> Vista Previa Exacta del Cronograma Oficial BCP (Hoja 2)
+            </h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Respeta exactamente las cabeceras naranjas, fila de Totales a pagar, TEA, TCEA y filas de periodo de gracia sin numerar.</p>
+          </div>
+          <button onclick="imprimirFichaOficial()" class="btn-bcp-orange text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-print"></i> Imprimir Ficha + Cronograma
+          </button>
+        </div>
+
+        <div id="cronogramaVistaWebContainer" class="max-w-4xl mx-auto shadow-lg rounded-xl overflow-hidden border border-slate-300"></div>
+      </div>
+
+      <!-- ================= TAB 3: EVALUACIÓN MASIVA ================= -->
       <div id="tabMasivo" class="hidden space-y-6">
         <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 animate-card">
           <h2 class="text-base font-bold text-[#002A8F] dark:text-blue-400 mb-1 flex items-center">
@@ -573,13 +788,58 @@
     </main>
   </div>
 
+  <!-- ================= ÁREA DE IMPRESIÓN OFICIAL (2 PÁGINAS A4) ================= -->
+  <div id="printWrapper">
+    
+    <!-- PÁGINA 1: PLANTILLA ORIGINAL BCP (sad_page-0001.jpg) -->
+    <div class="print-page-1">
+      <img id="printImgBg" src="https://i.postimg.cc/VvTGgk0F/sad-page-0001.jpg" alt="Calculadora Convenios Públicos BCP" loading="eager" decoding="sync">
+      
+      <div id="printOverlayFields">
+        <span class="p-field" id="p_convenio" style="top: 17.5%; left: 58.0%;"></span>
+        <span class="p-field" id="p_rci" style="top: 20.0%; left: 64.5%;"></span>
+        <span class="p-field" id="p_cargo" style="top: 22.6%; left: 58.0%; font-size: 7.5pt;"></span>
+
+        <span class="p-field" id="p_ingresos" style="top: 25.4%; right: 25.0%;"></span>
+        <span class="p-field" id="p_varMes" style="top: 26.9%; right: 25.0%;"></span>
+        <span class="p-field" id="p_var3m" style="top: 28.3%; right: 25.0%;"></span>
+        <span class="p-field" id="p_cafae" style="top: 29.8%; right: 25.0%;"></span>
+        <span class="p-field" id="p_noConstantes" style="top: 33.3%; right: 25.0%;"></span>
+
+        <span class="p-field" id="p_ley" style="top: 37.1%; right: 25.0%;"></span>
+        <span class="p-field" id="p_disponible" style="top: 39.2%; right: 25.0%;"></span>
+        <span class="p-field" id="p_reserva" style="top: 41.0%; right: 25.0%;"></span>
+        <span class="p-field" id="p_facultativos" style="top: 42.4%; right: 25.0%;"></span>
+        <span class="p-field" id="p_netoDisp" style="top: 44.4%; right: 25.0%; font-size: 9.5pt; font-weight: 900; color: #002A8F;"></span>
+
+        <span class="p-field" id="p_monto" style="top: 48.3%; right: 25.0%;"></span>
+        <span class="p-field" id="p_plazo" style="top: 49.9%; right: 25.0%;"></span>
+        <span class="p-field" id="p_fechaDesemb" style="top: 52.3%; left: 63.5%;"></span>
+        <span class="p-field" id="p_primerVenc" style="top: 53.7%; left: 63.5%; background:#ffffff; padding:0 4px;"></span>
+        <span class="p-field" id="p_tea" style="top: 55.0%; left: 64.5%;"></span>
+        <span class="p-field" id="p_pgSCC" style="top: 61.3%; left: 64.5%;"></span>
+
+        <div id="p_tablaDeudasOverlay"></div>
+
+        <span class="p-field" id="p_ingresoNetoSF" style="top: 82.5%; left: 62.0%;"></span>
+        <span class="p-field" id="p_porcEndeudamiento" style="top: 84.1%; left: 62.0%;"></span>
+        <span class="p-field" id="p_cem" style="top: 85.5%; left: 62.0%; font-weight: 800; color: #047857;"></span>
+        <span class="p-field" id="p_dictamen" style="top: 86.9%; left: 62.0%; font-weight: 900;"></span>
+      </div>
+    </div>
+
+    <!-- PÁGINA 2: CRONOGRAMA MODELO EXACTO (cromo_page-0001.jpg) -->
+    <div class="print-page-2" id="cronogramaPrintPage2"></div>
+
+  </div>
+
   <!-- Footer -->
   <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 py-5 px-4 text-center transition-colors">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.07 Oficial (05.11.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.11 Oficial (05.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -684,7 +944,7 @@
     </div>
   </div>
 
-  <!-- ================= MOTOR Y LÓGICA FINANCIERA ================= -->
+  <!-- ================= MOTOR Y LÓGICA FINANCIERA COMPLETA ================= -->
   <script>
     (function () {
       "use strict";
@@ -729,7 +989,7 @@
         }
       }
 
-      // 3. MATRIZ OFICIAL DE CONVENIOS (Sincronizada con Simulador_Convenios_Desprotegido.xlsx)
+      // 3. MATRIZ OFICIAL COMPLETA DE CONVENIOS (52 CONVENIOS INTACTOS)
       const CONVENIOS_DATA = Object.freeze([
         { "name": "AGRORURAL", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 15, "reserva": 0, "tea": 0.12 },
         { "name": "ANA", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 30, "venc": 15, "reserva": 0, "tea": 0.109 },
@@ -787,363 +1047,171 @@
         { "name": "UTES_N6", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 24, "venc": 15, "reserva": 0, "tea": 0.105 }
       ]);
 
+      // 4. DICCIONARIO COMPLETO E INTACTO DE CARGOS LABORALES POR CONVENIO
       const CARGOS_POR_CONVENIO = Object.freeze({
         "Ejército_del_Perú": [
-          "General de División",
-          "General de Brigada",
-          "Coronel",
-          "Teniente Coronel",
-          "Mayor",
-          "Capitán",
-          "Teniente",
-          "Sub Teniente",
-          "Técnico Jefe Superior",
-          "Técnico Jefe",
-          "Técnico de Primera",
-          "Técnico de Segunda",
-          "Técnico de Tercera",
-          "Suboficial Primera",
-          "Suboficial Segunda",
-          "Suboficial Tercera",
-          "Personal Administrativo"
+          "General de División", "General de Brigada", "Coronel", "Teniente Coronel",
+          "Mayor", "Capitán", "Teniente", "Sub Teniente", "Técnico Jefe Superior",
+          "Técnico Jefe", "Técnico de Primera", "Técnico de Segunda", "Técnico de Tercera",
+          "Suboficial Primera", "Suboficial Segunda", "Suboficial Tercera", "Personal Administrativo"
         ],
         "Policia_Nacional_del_Perú": [
-          "Teniente General",
-          "General",
-          "Coronel",
-          "Comandante",
-          "Mayor",
-          "Capitán",
-          "Teniente",
-          "Alferez",
-          "Sub Oficial Superior",
-          "Sub Oficial Brigadier",
-          "Sub Oficial Técnico de Primera",
-          "Sub Oficial Técnico de Segunda",
-          "Sub Oficial Técnico de Tercera",
-          "Sub Oficial de Primera",
-          "Sub Oficial de Segunda",
-          "Sub Oficial de Tercera",
-          "Personal Administrativo"
+          "Teniente General", "General", "Coronel", "Comandante", "Mayor", "Capitán",
+          "Teniente", "Alferez", "Sub Oficial Superior", "Sub Oficial Brigadier",
+          "Sub Oficial Técnico de Primera", "Sub Oficial Técnico de Segunda",
+          "Sub Oficial Técnico de Tercera", "Sub Oficial de Primera", "Sub Oficial de Segunda",
+          "Sub Oficial de Tercera", "Sub Oficial de Tercera menor a 55 años", "Personal Administrativo"
         ],
         "Marina_de_Guerra": [
-          "Vicealmirante",
-          "Contralmirante",
-          "Capitán de Navío",
-          "Capitán de Fragata",
-          "Capitán de Corbeta",
-          "Teniente Primero",
-          "Teniente Segundo",
-          "Alferez de Fragata",
-          "Técnico Superior Primero",
-          "Técnico Superior Segundo",
-          "Técnico Primero",
-          "Técnico Segundo",
-          "Técnico Tercero",
-          "Oficial de Mar Primero",
-          "Oficial de Mar Segundo",
-          "Oficial de Mar Tercero",
-          "Administrativos"
+          "Vicealmirante", "Contralmirante", "Capitán de Navío", "Capitán de Fragata",
+          "Capitán de Corbeta", "Teniente Primero", "Teniente Segundo", "Alferez de Fragata",
+          "Técnico Superior Primero", "Técnico Superior Segundo", "Técnico Primero",
+          "Técnico Segundo", "Técnico Tercero", "Oficial de Mar Primero", "Oficial de Mar Segundo",
+          "Oficial de Mar Tercero", "Administrativos"
         ],
-        "RENIEC": [
-          "CAS Indeterminado",
-          "DS. Nro 001-98-TR"
-        ],
-        "DIRIS_Lima_Norte": [
-          "NPS Asistencial",
-          "PS Asistencial",
-          "NPS Administrativo",
-          "PS Administrativo",
-          "CAS Indeterminado"
-        ],
+        "RENIEC": ["CAS Indeterminado", "DS. Nro 001-98-TR"],
+        "DIRIS_Lima_Norte": ["NPS Asistencial", "PS Asistencial", "NPS Administrativo", "PS Administrativo", "CAS Indeterminado"],
         "Hospital_de_apoyo_Iquitos": [
-          "NPS Asistencial",
-          "PS Asistencial",
-          "NPS Administrativo",
-          "PS Administrativo",
-          "NPS CAS Asistencial",
-          "PS CAS Asistencial",
-          "NPS CAS Administrativo",
-          "PS CAS Administrativo"
+          "NPS Asistencial", "PS Asistencial", "NPS Administrativo", "PS Administrativo",
+          "NPS CAS Asistencial", "PS CAS Asistencial", "NPS CAS Administrativo", "PS CAS Administrativo"
         ],
-        "ESSALUD": [
-          "Asistencial",
-          "Administrativo"
-        ],
-        "SENASA": [
-          "Nombrado",
-          "CAS Indeterminado",
-          "CAS Regular"
-        ],
-        "ONPE": [
-          "CAP Nombrado",
-          "CAP Indeterminado",
-          "CAS Indeterminado"
-        ],
-        "U_San_Juan_Bautista": [
-          "Indeterminado"
-        ],
-        "DIRIS_Lima_Centro": [
-          "NPS Asistencial",
-          "PS Asistencial",
-          "NPS Administrativo",
-          "PS Administrativo",
-          "CAS Indeterminado"
-        ],
-        "Ministerio_Defensa": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "UE403_Morropon": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
+        "ESSALUD": ["Asistencial", "Administrativo"],
+        "SENASA": ["Nombrado", "CAS Indeterminado", "CAS Regular"],
+        "ONPE": ["CAP Nombrado", "CAP Indeterminado", "CAS Indeterminado"],
+        "U_San_Juan_Bautista": ["Indeterminado"],
+        "DIRIS_Lima_Centro": ["NPS Asistencial", "PS Asistencial", "NPS Administrativo", "PS Administrativo", "CAS Indeterminado"],
+        "Ministerio_Defensa": ["Nombrado", "CAS Indeterminado"],
+        "UE403_Morropon": ["Nombrado", "CAS Indeterminado"],
         "Fuerza_Aerea_del_Perú": [
-          "Teniente General",
-          "Mayor General",
-          "Coronel",
-          "Comandante",
-          "Capitan",
-          "Teniente",
-          "Alferez",
-          "Técnico Supervisor",
-          "Técnico Inspector",
-          "Técnico de Primera",
-          "Técnico de Segunda",
-          "Técnico de Tercera",
-          "Suboficial de Primera",
-          "Suboficial de Segunda",
-          "Suboficial de Tercera",
-          "Personal Administrativo"
+          "Teniente General", "Mayor General", "Coronel", "Comandante", "Capitan",
+          "Teniente", "Alferez", "Técnico Supervisor", "Técnico Inspector", "Técnico de Primera",
+          "Técnico de Segunda", "Técnico de Tercera", "Suboficial de Primera", "Suboficial de Segunda",
+          "Suboficial de Tercera", "Personal Administrativo"
         ],
-        "EPSEL": [
-          "Ind_Administrativo",
-          "Ind_Obrero",
-          "Ind_Funcionario"
-        ],
-        "UNAP": [
-          "Nombrado",
-          "Indeterminado",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Regional_Loreto": [
-          "Nombrado Asistencial",
-          "Nombrado Administrativo",
-          "CAS Indeterminado"
-        ],
+        "EPSEL": ["Ind_Administrativo", "Ind_Obrero", "Ind_Funcionario"],
+        "UNAP": ["Nombrado", "Indeterminado", "CAS Indeterminado"],
+        "Hospital_Regional_Loreto": ["Nombrado Asistencial", "Nombrado Administrativo", "CAS Indeterminado"],
         "Red_Salud_APLAO": [
-          "Nombrado Asistencial Médico",
-          "Nombrado Profesional de Salud",
-          "Nombrado Técnico Asistencial",
-          "Administrativos",
-          "CAS_Indeterminado"
+          "Nombrado Asistencial Médico", "Nombrado Profesional de Salud",
+          "Nombrado Técnico Asistencial", "Administrativos", "CAS_Indeterminado"
         ],
-        "UTES_N6": [
-          "Nombrado Asistencial",
-          "Nombrado Administrativo",
-          "CAS Indeterminado"
-        ],
-        "Gobierno_Regional_Loreto": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "DIRIS_Lima_Este": [
-          "Asistencial",
-          "Administrativo",
-          "CAS Indeterminado"
-        ],
-        "PRONABEC": [
-          "CAS Indeterminado"
-        ],
-        "AGRORURAL": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "CHAVIMOCHIC": [
-          "Nombrado"
-        ],
-        "GERESA_La_Libertad": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Hospital_San_Bartolome": [
-          "Nombrado Asistencial",
-          "Nombrado Administrativo",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Goyeneche": [
-          "Asistencial",
-          "Administrativo",
-          "CAS Indeterminado"
-        ],
-        "Ministerio_Vivienda": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "GSR_Luciano_Castillo": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Red_Salud_Pacífico_Norte": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Red_Salud_Pacífico_Sur": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Ministerio_Justicia": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Mun_Cerro_Colorado": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Hospital_de_la_Amistad": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Cajamarca": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "ANA": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Trujillo": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
-        "Municipalidad_Piura": [
-          "Nombrado",
-          "CAS Indeterminado"
-        ],
+        "UTES_N6": ["Nombrado Asistencial", "Nombrado Administrativo", "CAS Indeterminado"],
+        "Gobierno_Regional_Loreto": ["Nombrados", "CAS Indeterminado"],
+        "DIRIS_Lima_Este": ["Asistencial", "Administrativo", "CAS Indeterminado"],
+        "PRONABEC": ["CAS Indeterminado"],
+        "AGRORURAL": ["Nombrado", "CAS Indeterminado"],
+        "CHAVIMOCHIC": ["Nombrado"],
+        "GERESA_La_Libertad": ["Nombrado", "CAS Indeterminado"],
+        "Hospital_San_Bartolome": ["Nombrado Asistencial", "Nombrado Administrativo", "CAS Indeterminado"],
+        "Hospital_Goyeneche": ["Asistencial", "Administrativo", "CAS Indeterminado"],
+        "Ministerio_Vivienda": ["Nombrado", "CAS Indeterminado"],
+        "GSR_Luciano_Castillo": ["Nombrado", "CAS Indeterminado"],
+        "Red_Salud_Pacífico_Norte": ["Nombrado", "CAS Indeterminado"],
+        "Red_Salud_Pacífico_Sur": ["Nombrado", "CAS Indeterminado"],
+        "Ministerio_Justicia": ["Nombrado", "CAS Indeterminado"],
+        "Mun_Cerro_Colorado": ["Nombrado", "CAS Indeterminado"],
+        "Hospital_de_la_Amistad": ["Nombrado", "CAS Indeterminado"],
+        "Hospital_Cajamarca": ["Nombrado", "CAS Indeterminado"],
+        "ANA": ["Nombrado", "CAS Indeterminado"],
+        "Hospital_Trujillo": ["Nombrado", "CAS Indeterminado"],
+        "Municipalidad_Piura": ["Nombrado", "CAS Indeterminado"],
         "Gobierno_Regional_Piura": [
-          "Nombrado",
-          "Administrativo",
-          "Obrero Permanente",
-          "Contrato por Servicios Personales",
-          "CAS Indeterminado"
+          "Nombrado", "Administrativo", "Obrero Permanente",
+          "Contrato por Servicios Personales", "CAS Indeterminado"
         ],
-        "Hospital_Regional_Lambayeque": [
-          "Nombrados",
-          "Administrativos",
-          "CAS Indeterminado"
-        ],
-        "DIRESA_Cajamarca": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Chulucanas": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "PRONACEJ": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "Hospital_Sullana": [
-          "Nombrados",
-          "Indeterminados",
-          "CAS Indeterminados"
-        ],
-        "INSN": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "DIRESA_Loreto": [
-          "Nombrado",
-          "Indeterminado",
-          "Tesoro Público",
-          "CAS Indeterminado"
-        ],
+        "Hospital_Regional_Lambayeque": ["Nombrados", "Administrativos", "CAS Indeterminado"],
+        "DIRESA_Cajamarca": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_Chulucanas": ["Nombrados", "CAS Indeterminado"],
+        "PRONACEJ": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_Sullana": ["Nombrados", "Indeterminados", "CAS Indeterminados"],
+        "INSN": ["Nombrados", "CAS Indeterminado"],
+        "DIRESA_Loreto": ["Nombrado", "Indeterminado", "Tesoro Público", "CAS Indeterminado"],
         "RED_Salud_Arequipa_Caylloma": [
-          "Nombrado Médico",
-          "Nombrado Profesional Salud",
-          "Nombrado Técnico asistencial",
-          "Nombrado Administrativo",
-          "Cas Indeterminado Médico",
-          "Cas Indeterminado Profesional Salud",
-          "Cas Indeterminado Técnico asistencial",
-          "Cas Indeterminado Administrativo"
+          "Nombrado Médico", "Nombrado Profesional Salud", "Nombrado Técnico asistencial",
+          "Nombrado Administrativo", "Cas Indeterminado Médico", "Cas Indeterminado Profesional Salud",
+          "Cas Indeterminado Técnico asistencial", "Cas Indeterminado Administrativo"
         ],
-        "Hospital_JAMO": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "Hospital_la_Caleta": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "UESA_413_Ascope": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "UESA_406_Sanchez_Carrion": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "Hospital_E_G_Barron": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
-        "REDIS_Chepen": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ],
+        "Hospital_JAMO": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_la_Caleta": ["Nombrados", "CAS Indeterminado"],
+        "UESA_413_Ascope": ["Nombrados", "CAS Indeterminado"],
+        "UESA_406_Sanchez_Carrion": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_E_G_Barron": ["Nombrados", "CAS Indeterminado"],
+        "REDIS_Chepen": ["Nombrados", "CAS Indeterminado"],
         "Ministerio_Publico": [
-          "UE002 - Nombrado",
-          "UE002 - Nombrados provisionales",
-          "UE002 - Plazo Indeterminado",
-          "UE002 - CAS Indeterminado",
-          "UE003 - Nombrado",
-          "UE003 - Nombrados provisionales",
-          "UE003 - Plazo Indeterminado",
-          "UE003 - CAS Indeterminado",
-          "UE004 - Nombrado",
-          "UE004 - Nombrados provisionales",
-          "UE004 - Plazo Indeterminado",
-          "UE004 - CAS Indeterminado",
-          "UE005 - Nombrado",
-          "UE005 - Nombrados provisionales",
-          "UE005 - Plazo Indeterminado",
-          "UE005 - CAS Indeterminado",
-          "UE007 - Nombrado",
-          "UE007 - Nombrados provisionales",
-          "UE007 - Plazo Indeterminado",
-          "UE007 - CAS Indeterminado",
-          "UE008 - Nombrado",
-          "UE008 - Nombrados provisionales",
-          "UE008 - Plazo Indeterminado",
-          "UE008 - CAS Indeterminado",
-          "UE012 - Nombrado",
-          "UE012 - Nombrados provisionales",
-          "UE012 - Plazo Indeterminado",
-          "UE012 - CAS Indeterminado"
+          "UE002 - Nombrado", "UE002 - Nombrados provisionales", "UE002 - Plazo Indeterminado", "UE002 - CAS Indeterminado",
+          "UE003 - Nombrado", "UE003 - Nombrados provisionales", "UE003 - Plazo Indeterminado", "UE003 - CAS Indeterminado",
+          "UE004 - Nombrado", "UE004 - Nombrados provisionales", "UE004 - Plazo Indeterminado", "UE004 - CAS Indeterminado",
+          "UE005 - Nombrado", "UE005 - Nombrados provisionales", "UE005 - Plazo Indeterminado", "UE005 - CAS Indeterminado",
+          "UE007 - Nombrado", "UE007 - Nombrados provisionales", "UE007 - Plazo Indeterminado", "UE007 - CAS Indeterminado",
+          "UE008 - Nombrado", "UE008 - Nombrados provisionales", "UE008 - Plazo Indeterminado", "UE008 - CAS Indeterminado",
+          "UE012 - Nombrado", "UE012 - Nombrados provisionales", "UE012 - Plazo Indeterminado", "UE012 - CAS Indeterminado"
         ],
-        "UE_Salud_Cajamarca": [
-          "Nombrados",
-          "CAS Indeterminado"
-        ]
+        "UE_Salud_Cajamarca": ["Nombrados", "CAS Indeterminado"]
       });
 
       const TIPOS_DEUDA = Object.freeze([
-        { id: "hipotecario", label: "Crédito Hipotecario", factorFijo: 0.011, factorPorc: 0.01 },
-        { id: "efectivo", label: "Crédito Efectivo", factorFijo: 0.044, factorPorc: 0 },
-        { id: "vehicular", label: "Crédito Vehicular", factorFijo: 0.024, factorPorc: 0.035 },
-        { id: "pyme", label: "Pyme", factorFijo: 0.088, factorPorc: 0.022 },
-        { id: "comercial", label: "Comercial", factorFijo: 0.028, factorPorc: 0 },
-        { id: "indirecta", label: "Deuda Indirecta", factorFijo: 0.000694, factorPorc: 0.0006944 },
-        { id: "tc_utilizada", label: "Línea utilizada de tarjeta de Crédito", factorFijo: 0.007417, factorPorc: 0.078 },
-        { id: "tc_no_utilizada", label: "Línea no utilizada", factorFijo: 0.007417, factorPorc: 0.003306, factorLNU: 0.0065833922 }
+        { id: "hipotecario", label: "Crédito Hipotecario", factorFijo: 0.011, factorPorc: 0.01, topPct: 69.8 },
+        { id: "efectivo", label: "Crédito Efectivo", factorFijo: 0.044, factorPorc: 0, topPct: 71.2 },
+        { id: "vehicular", label: "Crédito Vehicular", factorFijo: 0.024, factorPorc: 0.035, topPct: 72.6 },
+        { id: "pyme", label: "Pyme", factorFijo: 0.088, factorPorc: 0.022, topPct: 74.0 },
+        { id: "comercial", label: "Comercial", factorFijo: 0.028, factorPorc: 0, topPct: 75.5 },
+        { id: "indirecta", label: "Deuda Indirecta", factorFijo: 0.000694, factorPorc: 0.0006944, topPct: 76.9 },
+        { id: "tc_utilizada", label: "Línea utilizada de tarjeta de Crédito", factorFijo: 0.007417, factorPorc: 0.078, topPct: 78.4 },
+        { id: "tc_no_utilizada", label: "Línea no utilizada", factorFijo: 0.007417, factorPorc: 0.003306, factorLNU: 0.0065833922, topPct: 79.9 }
       ]);
 
       let camarguitoGloboCerrado = true;
 
+      // Plantilla base de la Hoja 1 (ficha): se carga sola desde este enlace, sin subir nada.
+      const PLANTILLA_BASE_URL = "https://i.postimg.cc/VvTGgk0F/sad-page-0001.jpg";
+
+      function cargarPlantillaGuardada() {
+        const imgEl = document.getElementById("printImgBg");
+        const txtBtn = document.getElementById("txtBtnPlantilla");
+        const bgGuardado = localStorage.getItem("plantilla_bcp_bg");
+        if (bgGuardado) {
+          // Si alguna vez se subió una imagen manualmente, esa tiene prioridad.
+          if (imgEl) imgEl.src = bgGuardado;
+          if (txtBtn) txtBtn.textContent = "Plantilla Hoja 1 ✓";
+        } else {
+          if (imgEl) imgEl.src = PLANTILLA_BASE_URL;
+          if (txtBtn) txtBtn.textContent = "Plantilla Base ✓";
+        }
+      }
+
+      // Espera a que la imagen de la Hoja 1 esté realmente cargada (si no, la ficha saldría en blanco al imprimir).
+      function esperarPlantillaLista(timeoutMs) {
+        return new Promise((resolve) => {
+          const img = document.getElementById("printImgBg");
+          if (!img) return resolve(false);
+          if (img.complete && img.naturalWidth > 0) return resolve(true);
+          let fin = false;
+          const cerrar = (ok) => { if (!fin) { fin = true; resolve(ok); } };
+          img.addEventListener("load", () => cerrar(true), { once: true });
+          img.addEventListener("error", () => cerrar(false), { once: true });
+          setTimeout(() => cerrar(img.complete && img.naturalWidth > 0), timeoutMs);
+        });
+      }
+
+      window.subirImagenPlantilla = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          localStorage.setItem("plantilla_bcp_bg", dataUrl);
+          const imgEl = document.getElementById("printImgBg");
+          if (imgEl) imgEl.src = dataUrl;
+          const txtBtn = document.getElementById("txtBtnPlantilla");
+          if (txtBtn) txtBtn.textContent = "Plantilla Hoja 1 ✓";
+          alert("¡Plantilla Base cargada exitosamente! Se imprimirá en la Hoja 1 junto con el Cronograma Oficial en la Hoja 2.");
+        };
+        reader.readAsDataURL(file);
+      };
+
       document.addEventListener("DOMContentLoaded", () => {
         initTheme();
+        cargarPlantillaGuardada();
         initConveniosSelect();
         initDeudasTable();
         vincularEventos();
@@ -1173,6 +1241,31 @@
 
         recalcular();
       });
+
+      // FUNCIÓN DE LIMPIEZA
+      window.limpiarCampos = function() {
+        document.getElementById("inpIngresos").value = "";
+        document.getElementById("inpVarMes").value = "0";
+        document.getElementById("inpVar3m").value = "0";
+        document.getElementById("inpCafae").value = "0";
+        document.getElementById("inpNoConstantes").value = "0";
+        document.getElementById("inpLey").value = "";
+        document.getElementById("inpFacultativos").value = "0";
+        document.getElementById("inpMonto").value = "";
+
+        TIPOS_DEUDA.forEach(d => {
+          const bcp = document.getElementById(`bcp_${d.id}`);
+          const nobcp = document.getElementById(`nobcp_${d.id}`);
+          const saldo = document.getElementById(`saldo_${d.id}`);
+          const saldoAct = document.getElementById(`saldoAct_${d.id}`);
+          if (bcp) bcp.value = "";
+          if (nobcp) nobcp.value = "";
+          if (saldo) saldo.value = "";
+          if (saldoAct) saldoAct.value = "";
+        });
+
+        recalcular();
+      };
 
       function initConveniosSelect() {
         const sel = document.getElementById("selConvenio");
@@ -1235,7 +1328,7 @@
 
         const inputs = [
           "inpIngresos", "inpVarMes", "inpVar3m", "inpCafae", "inpNoConstantes",
-          "inpLey", "inpFacultativos", "inpMonto", "selPlazo", "inpTEA", "selDesgravamen", "inpFechaDesembolso"
+          "inpLey", "inpFacultativos", "inpMonto", "selPlazo", "inpTEA", "selDesgravamen", "selEnvioCta", "inpFechaDesembolso"
         ];
         inputs.forEach(id => {
           document.getElementById(id).addEventListener("input", recalcular);
@@ -1268,16 +1361,37 @@
         }
       }
 
+      // Equivalente a EDATE de Excel: si el día no existe en el mes destino, usa el último día de ese mes.
+      // (El setMonth() nativo de JS "se desborda": 31/12 + 2 meses daba 03/03 en vez de 28/02.)
       function addMonths(date, months) {
-        const d = new Date(date.getTime());
-        d.setMonth(d.getMonth() + months);
-        return d;
+        const y = date.getFullYear();
+        const m = date.getMonth() + months;
+        const ultimoDia = new Date(y, m + 1, 0).getDate();
+        return new Date(y, m, Math.min(date.getDate(), ultimoDia));
+      }
+
+      // Equivalente a la fórmula de fecha de las filas 24+ del Excel:
+      // EOMONTH(anterior,1) si su día es < día de vencimiento; si no, DATE(año, mes, día de vencimiento).
+      function siguienteVencimiento(prev, diaVenc) {
+        const eom = new Date(prev.getFullYear(), prev.getMonth() + 2, 0); // último día del mes siguiente
+        return (eom.getDate() < diaVenc) ? eom : new Date(eom.getFullYear(), eom.getMonth(), diaVenc);
       }
 
       function diffDays(d1, d2) {
         const utc1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
         const utc2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
         return Math.round((utc1 - utc2) / (1000 * 60 * 60 * 24));
+      }
+
+      function formatDatePE(d) {
+        const dd = String(d.getDate()).padStart(2, '0');
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const yyyy = d.getFullYear();
+        return `${dd}/${mm}/${yyyy}`;
+      }
+
+      function fmtNum(n) {
+        return Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       }
 
       function calcularPGSCC(convenioObj, fechaDesembStr) {
@@ -1303,7 +1417,7 @@
         return 1;
       }
 
-      // Función de Reserva Dinámica (Sincronizada con Base!K2:K55)
+      // RESERVA DINÁMICA COMPLETA E INTACTA
       function obtenerReservaDinamica(convObj, cargo) {
         const convNombre = convObj.name;
         const c = (cargo || "").trim();
@@ -1331,9 +1445,54 @@
         return convObj.reserva;
       }
 
-      // Fórmulas exactas sincronizadas con Base!D, Base!E y Cronograma!L23 / Cáratula!K68
+      // TCEA = (1+TIR mensual)^12 - 1, igual que Cáratula!K71:K72 (=IRR(Cronograma!P20:P94)).
+      // `flujos` son SOLO las cuotas totales (columna P) en períodos consecutivos 1..n:
+      // IRR de Excel ignora las celdas vacías/texto de las filas de gracia, por eso NO se agregan ceros.
+      function calcularTCEAExcel(monto, flujos) {
+        if (!monto || monto <= 0 || !flujos || flujos.length === 0) return 0;
+        const npv = (r) => {
+          let v = -monto;
+          for (let t = 0; t < flujos.length; t++) v += flujos[t] / Math.pow(1 + r, t + 1);
+          return v;
+        };
+        // Bisección (VAN decreciente en r): robusta y precisa; el flujo tiene un único cambio de signo.
+        let lo = -0.99, hi = 1.0;
+        while (npv(hi) > 0 && hi < 1e6) hi *= 2;
+        for (let i = 0; i < 300; i++) {
+          const mid = (lo + hi) / 2;
+          if (npv(mid) > 0) lo = mid; else hi = mid;
+          if (hi - lo < 1e-15) break;
+        }
+        const r = (lo + hi) / 2;
+        return (Math.pow(1 + r, 12) - 1) * 100;
+      }
+
+      // FUNCIÓN DE CUOTA EXACTA (USADA EN SIMULADOR INDIVIDUAL Y MASIVO)
       function calcularCuotaExactaConvenio(monto, plazo, tea, desgravamenMensual, fechaDesembStr, convenioObj) {
-        if (!monto || monto <= 0 || !plazo || plazo <= 0) return 0;
+        const res = generarCronogramaYCuotaExacta(monto, plazo, tea, desgravamenMensual, 0, fechaDesembStr, convenioObj);
+        return res.cuotaEvaluacion;
+      }
+
+      // GENERADOR DEL CRONOGRAMA OFICIAL (HOJA 2) Y CUOTA EXACTA
+      // RÉPLICA FIEL, CELDA POR CELDA, DE LA HOJA "Cronograma" DEL EXCEL (Nuevo simulador Convenios):
+      //   filas 20-22 = períodos de gracia (20 solo si existe C20) · fila 23 = cuota 1 · filas 24+ = cuotas 2..n
+      //   Totales (fila 17) = SUM de cada columna desde la fila 20, tal cual el Excel.
+      // W24 del Excel (celda fija = 4) se suma a la cuota: L23 = Cáratula!K68 + W24.
+      const CARGO_FIJO_CUOTA_W24 = 4.0;
+
+      function generarCronogramaYCuotaExacta(monto, plazo, tea, desgravamenMensual, envioFisico, fechaDesembStr, convenioObj) {
+        if (!monto || monto <= 0 || !plazo || plazo <= 0) {
+          return {
+            cuotaEvaluacion: 0,
+            cuotaFinanciera: 0,
+            cuotaTotal: 0,
+            tceaPct: 0,
+            primerVencStr: "-",
+            filasGracia: [],
+            filasCuotas: [],
+            totales: { interes: 0, desgrav: 0, amort: 0, cuotaFin: 0, envio: 0, poliza: 0, prot: 0, cuotaTotal: 0 }
+          };
+        }
 
         const fParts = fechaDesembStr.split("-");
         const fDesemb = new Date(parseInt(fParts[0], 10), parseInt(fParts[1], 10) - 1, parseInt(fParts[2], 10));
@@ -1343,7 +1502,7 @@
         const diaVenc = convenioObj.venc;
         const pgBase = convenioObj.pgBase || 1;
 
-        // Periodo de gracia 1 (Base!D2:D55)
+        // Base!D (Periodo de gracia 1) -> Cáratula!D71
         let pg1 = 1;
         if (["Policia_Nacional_del_Perú", "Marina_de_Guerra", "Ejército_del_Perú", "Fuerza_Aerea_del_Perú", "Ministerio_Publico"].includes(convenioObj.name)) {
           pg1 = 2;
@@ -1353,7 +1512,7 @@
           pg1 = (dayDesemb > diaCorte) ? (pgBase + 1) : pgBase;
         }
 
-        // Periodo final 1 (Base!E2:E55)
+        // Base!E (Periodo final 1) -> Cáratula!D73
         let pf1 = 2;
         if (["ANA", "Ministerio_Defensa", "Ministerio_Justicia", "Mun_Cerro_Colorado", "ONPE"].includes(convenioObj.name)) {
           pf1 = 2;
@@ -1365,71 +1524,294 @@
           pf1 = (dayDesemb > diaCorte) ? (pgBase + 1) : pgBase;
         }
 
-        // Primer vencimiento (Cáratula!G38)
+        // Cáratula!G38 = DATE(YEAR(EDATE(G37,D73)), MONTH(EDATE(G37,D73)), D72)
         const fBaseVenc = addMonths(fDesemb, pf1);
         const fPrimerVenc = new Date(fBaseVenc.getFullYear(), fBaseVenc.getMonth(), diaVenc);
 
-        const tna365 = (Math.pow(1 + tea, 1 / 12) - 1) * 12 * (365 / 360);
-        const tasaDesgAnual = desgravamenMensual * 12;
-        const iDiario = tna365 / 365;
-        const dDiario = tasaDesgAnual / 365;
+        // Tasas (Cáratula!K39:K41, P39:P41, K66)
+        const K39 = ((Math.pow(1 + tea, 1 / 12) - 1) * 12) * 365 / 360;   // TNA 365
+        const P40 = (desgravamenMensual * 12) / 365;                      // desgravamen diario
+        const K41 = (K39 / 365) * 31;
+        const P41 = P40 * 31;
+        const K66 = (K41 + P41) / (1 - Math.pow(1 + K41 + P41, -plazo));
 
-        const k41 = iDiario * 31;
-        const p41 = dDiario * 31;
-        const k66 = (k41 + p41) / (1 - Math.pow(1 + k41 + p41, -plazo));
-
+        // Fechas de filas 20-23
         const c23 = fPrimerVenc;
         const c22 = addMonths(c23, -1);
         const c21 = addMonths(c22, -1);
-
         const isPnpOMg = (convenioObj.name === "Policia_Nacional_del_Perú" || convenioObj.name === "Marina_de_Guerra");
-        const condVaciaC20 = (dayDesemb > diaVenc) || (isPnpOMg && dayDesemb < 5);
-        let tieneC20 = false;
-        let c20 = null;
+        const anulaC20 = (dayDesemb > diaVenc) || (isPnpOMg && dayDesemb < 5);
+        const c20 = (!anulaC20 && pg1 === 2) ? addMonths(c21, -1) : null;
+        const tieneC20 = (c20 !== null);
 
-        if (!condVaciaC20 && pg1 === 2) {
-          tieneC20 = true;
-          c20 = addMonths(c21, -1);
-        }
+        const filasGracia = [];
 
-        let j20 = 0, i20 = 0;
+        // ---- Fila 20 (solo si C20 <> "")
+        let I20 = 0, J20 = 0, G20 = 0;
         if (tieneC20) {
-          const d20 = diffDays(c20, fDesemb);
-          const f20 = monto;
-          const g20 = f20;
-          const h20 = iDiario * d20;
-          i20 = h20 * f20;
-          j20 = g20 * dDiario * d20;
+          const D20 = diffDays(c20, fDesemb);
+          const F20 = monto;
+          G20 = F20;
+          I20 = (K39 / 365 * D20) * F20;
+          J20 = G20 * P40 * D20;
+          filasGracia.push({ fecha: formatDatePE(c20), capital: G20, interes: I20, desgravamen: J20 });
         }
 
-        const d21 = diffDays(c21, fDesemb);
-        const e21 = !tieneC20 ? d21 : diffDays(c21, c20);
-        const f21 = monto;
-        const g21 = f21;
-        const h21 = iDiario * e21;
-        const i21 = h21 * f21;
-        const j21 = !tieneC20 ? (f21 * e21 * dDiario) : (dDiario * e21 * monto);
+        // ---- Fila 21
+        const E21 = tieneC20 ? diffDays(c21, c20) : diffDays(c21, fDesemb);
+        const F21 = tieneC20 ? G20 : monto;
+        const G21 = tieneC20 ? G20 : F21;
+        const I21 = (K39 / 365 * E21) * F21;
+        const J21 = tieneC20 ? (P40 * E21 * G20) : (F21 * E21 * P40);
+        filasGracia.push({ fecha: formatDatePE(c21), capital: G21, interes: I21, desgravamen: J21 });
 
-        const e22 = diffDays(c22, c21);
-        const g22 = !tieneC20 ? (g21 + (iDiario * e22 * g21) + (dDiario * e22 * g21)) : (g21 + i21 + j21);
-        const f22 = !tieneC20 ? g21 : g22;
-        const h22 = iDiario * e22;
-        const i22 = h22 * f22;
-        const j22 = !tieneC20 ? (dDiario * e22 * g21) : (dDiario * e22 * g22);
-
-        const f23 = g22;
-        const g23 = !tieneC20 ? g22 : (g22 + i22 + j22);
-
-        let k68 = 0;
-        if (!tieneC20) {
-          k68 = (f23 + j21 + j22) * k66;
+        // ---- Fila 22
+        const E22 = diffDays(c22, c21);
+        const H22 = K39 / 365 * E22;
+        let F22, G22, I22, J22;
+        if (tieneC20) {
+          G22 = G21 + I21 + J21;
+          F22 = G22;
+          I22 = H22 * F22;
+          J22 = P40 * E22 * G22;
         } else {
-          k68 = (g23 + j20 + j21 + j22) * k66;
+          F22 = G21;
+          I22 = H22 * F22;
+          J22 = P40 * E22 * G21;
+          G22 = G21 + I22 + J22;
+        }
+        filasGracia.push({ fecha: formatDatePE(c22), capital: G22, interes: I22, desgravamen: J22 });
+        // OJO: en el Excel, K22 = L22-I22-J22 = -(I22+J22) (celda con fuente del color del fondo) y K17 la suma.
+        const K22 = -(I22 + J22);
+
+        // ---- Fila 23 (cuota 1)
+        const E23 = diffDays(c23, c22);
+        const F23 = G22;
+        const G23 = tieneC20 ? (G22 + I22 + J22) : G22;
+        const I23 = (K39 / 365 * E23) * F23 + (tieneC20 ? I20 : I21);
+        const J23 = P40 * E23 * G23;
+        const K68 = tieneC20 ? ((G23 + J20 + J21 + J22) * K66) : ((F23 + J21 + J22) * K66);
+        const L = K68 + CARGO_FIJO_CUOTA_W24;          // Cronograma!L23 (= L24 = L25 ...)
+        const M = envioFisico || 0;                    // Cronograma!M (envío físico por cuota)
+        const cuotaTotMes = L + M;                     // P = O + N + M + L
+
+        const filasCuotas = [];
+        const flujosTIR = [];
+        let sumInteres = I20 + I21 + I22 + I23;
+        let sumDesgrav = J20 + J21 + J22 + J23;
+        let sumAmort = K22;                            // K17 = SUM(K20:...) incluye K22
+        let sumCuotaFin = 0;
+        let sumEnvio = 0;
+        let sumCuotaTotal = 0;
+
+        let capital = G23;
+        let interes = I23;
+        let desgrav = J23;
+        let fechaCuota = c23;
+        let fechaPrev = c22;
+        let amort = L - interes - desgrav;
+
+        for (let n = 1; n <= plazo; n++) {
+          if (n > 1) {
+            // Filas 24+: G = F - K(anterior) ; I = H*G ; J = P40*E*G ; K = L - I - J
+            fechaPrev = fechaCuota;
+            fechaCuota = siguienteVencimiento(fechaPrev, diaVenc);
+            const E = diffDays(fechaCuota, fechaPrev);
+            capital = capital - amort;
+            interes = (K39 / 365 * E) * capital;
+            desgrav = P40 * E * capital;
+            amort = L - interes - desgrav;
+            sumInteres += interes;
+            sumDesgrav += desgrav;
+          }
+
+          filasCuotas.push({
+            num: n,
+            fecha: formatDatePE(fechaCuota),
+            capital: capital,
+            interes: interes,
+            desgravamen: desgrav,
+            amortizacion: amort,
+            cuotaFin: L,
+            envio: M,
+            poliza: 0,
+            proteccion: 0,
+            cuotaTotal: cuotaTotMes
+          });
+
+          sumAmort += amort;
+          sumCuotaFin += L;
+          sumEnvio += M;
+          sumCuotaTotal += cuotaTotMes;
+          flujosTIR.push(cuotaTotMes);
         }
 
-        // Cronograma!W24 = 4.00 soles (Portes y administración)
-        const w24 = 4.0;
-        return k68 + w24;
+        const tceaPct = calcularTCEAExcel(monto, flujosTIR);
+
+        return {
+          cuotaEvaluacion: L,
+          cuotaFinanciera: L,
+          cuotaTotal: cuotaTotMes,
+          tceaPct: tceaPct,
+          primerVencStr: formatDatePE(fPrimerVenc),
+          filasGracia: filasGracia,
+          filasCuotas: filasCuotas,
+          totales: {
+            interes: sumInteres,
+            desgrav: sumDesgrav,
+            amort: sumAmort,
+            cuotaFin: sumCuotaFin,
+            envio: sumEnvio,
+            poliza: 0,
+            prot: 0,
+            cuotaTotal: sumCuotaTotal
+          }
+        };
+      }
+
+      // CONSTRUIR EL HTML DEL CRONOGRAMA IDÉNTICO A cromo_page-0001.jpg
+      function construirHTMLCronogramaExacto(resCron, teaPct) {
+        const logoSrc = document.getElementById("headerBcpLogo").src;
+        const tot = resCron.totales;
+
+        let html = `
+          <div class="bcp-cron-sheet">
+            <div style="text-align: center; margin-bottom: 10px;">
+              <img src="${logoSrc}" alt="BCP" style="height: 28px; display: inline-block;">
+            </div>
+
+            <div class="bcp-cron-title">Cronograma</div>
+
+            <div class="bcp-cron-notes">
+              <div>Nota: Todo crédito se encuentra sujeto a la evaluación crediticia del Banco, quien determina el monto y plazo a otorgar.</div>
+              <div style="padding-left: 19px;">Este documento ha sido emitido en base a la información proporcionada por el cliente y tiene carácter referencial</div>
+            </div>
+
+            <div class="bcp-cron-rates">
+              <div class="bcp-cron-rates-row">
+                <span>Tasa de Interés Efectiva Anual (En base a 360 días)</span>
+                <span>${teaPct.toFixed(2)}%</span>
+              </div>
+              <div class="bcp-cron-rates-row">
+                <span>Tasa de Costo Efectiva Anual (En base a 360 días)</span>
+                <span>${resCron.tceaPct.toFixed(2)}%</span>
+              </div>
+              <div style="font-weight: 700; margin-top: 6px;">Cantidad total a pagar</div>
+            </div>
+
+            <table class="bcp-cron-table">
+              <colgroup>
+                <col style="width: 3.5%;">
+                <col style="width: 8.5%;">
+                <col style="width: 11.0%;">
+                <col style="width: 9.5%;">
+                <col style="width: 9.5%;">
+                <col style="width: 10.5%;">
+                <col style="width: 10.5%;">
+                <col style="width: 9.0%;">
+                <col style="width: 8.5%;">
+                <col style="width: 8.5%;">
+                <col style="width: 11.0%;">
+              </colgroup>
+
+              <thead>
+                <tr>
+                  <th colspan="3" style="background-color: #E86C3A;"></th>
+                  <th>Interés</th>
+                  <th>Seguro<br>desgravamen</th>
+                  <th>Amortización</th>
+                  <th>Cuota</th>
+                  <th>Envío físico<br>de estado de<br>cuenta</th>
+                  <th>Evaluación<br>de póliza<br>endosada</th>
+                  <th>Seguro de<br>protección<br>financiera</th>
+                  <th>Cuota</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bcp-row-totales">
+                  <td colspan="3" style="text-align: left; font-weight: 700;">Totales a pagar</td>
+                  <td><div class="cell-curr"><span>S/</span><span>${fmtNum(tot.interes)}</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>${fmtNum(tot.desgrav)}</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>${fmtNum(tot.amort)}</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>${fmtNum(tot.cuotaFin)}</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>${tot.envio > 0 ? fmtNum(tot.envio) : "-"}</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>-</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>-</span></div></td>
+                  <td><div class="cell-curr"><span>S/</span><span>${fmtNum(tot.cuotaTotal)}</span></div></td>
+                </tr>
+
+                <tr>
+                  <td colspan="11" style="background: #ffffff !important; border: none !important; height: 5px; padding: 0;"></td>
+                </tr>
+
+                <tr>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">N°</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Fecha</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Capital</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Interés</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Seguro<br>desgravamen</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Amortización</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Cuota</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Envío físico<br>de estado de<br>cuenta</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Evaluación<br>de póliza<br>endosada</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Seguro de<br>protección<br>financiera</th>
+                  <th style="background:#E86C3A; color:#fff; font-weight:700; text-align:center; padding:3px 2px; border:0.5px solid #fff;">Cuota</th>
+                </tr>
+        `;
+
+        let rowIndex = 0;
+
+        resCron.filasGracia.forEach(fg => {
+          const rowClass = (rowIndex % 2 === 0) ? "bcp-row-odd" : "bcp-row-even";
+          rowIndex++;
+          html += `
+            <tr class="${rowClass}">
+              <td style="text-align: center;"></td>
+              <td style="text-align: center;">${fg.fecha}</td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fg.capital)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fg.interes)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fg.desgravamen)}</span></div></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          `;
+        });
+
+        resCron.filasCuotas.forEach(fc => {
+          const rowClass = (rowIndex % 2 === 0) ? "bcp-row-odd" : "bcp-row-even";
+          rowIndex++;
+          html += `
+            <tr class="${rowClass}">
+              <td style="text-align: center;">${fc.num}</td>
+              <td style="text-align: center;">${fc.fecha}</td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.capital)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.interes)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.desgravamen)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.amortizacion)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.cuotaFin)}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fc.envio > 0 ? fmtNum(fc.envio) : "-"}</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>-</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>-</span></div></td>
+              <td><div class="cell-curr"><span>S/</span><span>${fmtNum(fc.cuotaTotal)}</span></div></td>
+            </tr>
+          `;
+        });
+
+        html += `
+              </tbody>
+            </table>
+
+            <div style="text-align: center; font-size: 5.5pt; color: #555555; margin-top: 8px;">
+              Información de uso público / C2
+            </div>
+          </div>
+        `;
+
+        return html;
       }
 
       function recalcular() {
@@ -1438,7 +1820,7 @@
         const conv = CONVENIOS_DATA.find(c => c.name === convNombre) || CONVENIOS_DATA[0];
         const fechaDesembStr = document.getElementById("inpFechaDesembolso").value || "2026-10-07";
 
-        // Reglas oficiales de RCI (Sincronizadas con Cáratula!$J$11:$J$15)
+        // REGLAS COMPLETAS DE RCI INTACTAS
         let rci = conv.rci;
         if (convNombre === "Policia_Nacional_del_Perú") {
           if (cargo === "Sub Oficial de Tercera menor a 55 años") rci = 0.30;
@@ -1480,34 +1862,33 @@
         const G29 = parseFloat(document.getElementById("inpFacultativos").value) || 0;
         const G28 = reservaAplicada;
 
-        // Equivalente exacto de L13 en Cáratula!K26
         let rciL13 = conv.rci;
         if (["DIRIS_Lima_Norte", "DIRIS_Lima_Centro", "DIRIS_Lima_Este", "INSN"].includes(convNombre) && cargo.includes("CAS")) rciL13 = 0.40;
         else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || (convNombre === "Hospital_Sullana" && (cargo.includes("Nombrados") || cargo.includes("Indeterminados")))) rciL13 = 0.45;
         else if (convNombre === "Policia_Nacional_del_Perú" && (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda")) rciL13 = 0.40;
         else if (convNombre === "Policia_Nacional_del_Perú" && cargo === "Sub Oficial de Tercera menor a 55 años") rciL13 = 0.30;
 
-        // Reproducción exacta de la cascada G26 -> N26 -> M26 -> L31 -> L26 -> K26 del Excel
+        // REGLAS COMPLETAS DE DISPONIBLE INTACTAS
         let disponible = 0;
         if (convNombre === "Hospital_Cajamarca") {
           if (cargo.includes("CAS")) {
-            disponible = ((G15 + G18 - G21) * rci) - G24; // G26
+            disponible = ((G15 + G18 - G21) * rci) - G24;
           } else {
-            disponible = ((G15 + G18) * rci) - G21 - G24; // N26
+            disponible = ((G15 + G18) * rci) - G21 - G24;
           }
         } else if (convNombre === "DIRESA_Cajamarca") {
-          disponible = (G15 + G18 - G21 - G24) * rci; // M26
+          disponible = (G15 + G18 - G21 - G24) * rci;
         } else if (convNombre === "Ministerio_Justicia" && cargo.includes("CAS")) {
-          disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24 - (G15 * 0.08)) * rci; // L31
+          disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24 - (G15 * 0.08)) * rci;
         } else if (
           (["Red_Salud_Pacífico_Sur", "Red_Salud_Pacífico_Norte", "UTES_N6", "REDIS_Chepen"].includes(convNombre) && cargo.includes("CAS")) ||
           ["DIRESA_Loreto", "Hospital_JAMO", "UE_Salud_Cajamarca"].includes(convNombre)
         ) {
-          disponible = ((G15 - G16 + (G17 * 0.5) + G18 - G21) * rci) - G24; // L26
+          disponible = ((G15 - G16 + (G17 * 0.5) + G18 - G21) * rci) - G24;
         } else if (convNombre === "U_San_Juan_Bautista") {
-          disponible = G15 * rci; // K26
+          disponible = G15 * rci;
         } else {
-          disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24) * rciL13; // K26 general
+          disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24) * rciL13;
         }
 
         const deduccionExtra = (convNombre === "Ejército_del_Perú") ? 5 : 0;
@@ -1519,6 +1900,9 @@
         let sumaPonderadaK58 = 0;
         let sumaCuotasDirectasK58 = 0;
         let hayDatosCarga = false;
+
+        const overlayDeudasContainer = document.getElementById("p_tablaDeudasOverlay");
+        overlayDeudasContainer.innerHTML = "";
 
         TIPOS_DEUDA.forEach(d => {
           const valBcpStr = document.getElementById(`bcp_${d.id}`).value.trim();
@@ -1570,6 +1954,12 @@
           } else {
             celdaCuota.textContent = "S/ -";
           }
+
+          if (d_num > 0) overlayDeudasContainer.innerHTML += `<span class="p-field" style="top:${d.topPct}%; left:31.5%;">${d_num.toFixed(2)}</span>`;
+          if (e_num > 0) overlayDeudasContainer.innerHTML += `<span class="p-field" style="top:${d.topPct}%; left:40.5%;">${e_num.toFixed(2)}</span>`;
+          if (f_num > 0) overlayDeudasContainer.innerHTML += `<span class="p-field" style="top:${d.topPct}%; left:50.0%;">${f_num.toFixed(2)}</span>`;
+          if (g_num > 0) overlayDeudasContainer.innerHTML += `<span class="p-field" style="top:${d.topPct}%; left:62.5%;">${g_num.toFixed(2)}</span>`;
+          if (H_val > 0) overlayDeudasContainer.innerHTML += `<span class="p-field" style="top:${d.topPct}%; right:17.5%;">${H_val.toFixed(2)}</span>`;
         });
 
         const baseEndeudamiento = (G15 - G21 + G18 - G24 - G29);
@@ -1581,7 +1971,6 @@
           porcEndeudamiento = K58;
         }
 
-        // Tope de Endeudamiento con excepción para Ministerio Público y UTES_N6 (70%)
         let topeEndeudamiento = 0.65;
         if (convNombre === "Gobierno_Regional_Piura" && cargo.includes("CAS")) topeEndeudamiento = 0.50;
         if (convNombre === "Ministerio_Publico" || convNombre === "UTES_N6") topeEndeudamiento = 0.70;
@@ -1599,22 +1988,66 @@
           document.getElementById("resEndeudamiento").textContent = "-";
         }
 
-        document.getElementById("lblCEM").textContent = "S/ " + Math.max(0, cem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        // CEM tal cual el Excel (Cáratula!G63): NO se limita a 0; si es negativo se muestra el monto real (-S/ xxx).
+        const lblCEMel = document.getElementById("lblCEM");
+        lblCEMel.textContent = (cem < 0 ? "-S/ " : "S/ ") + Math.abs(cem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        lblCEMel.style.color = cem < 0 ? "#ef4444" : "";
         document.getElementById("lblDictamenSBS").textContent = dictamenSBS;
         document.getElementById("lblDictamenSBS").className = dictamenSBS === "Continuar" ? "font-extrabold text-emerald-600 dark:text-emerald-400 text-sm" : "font-extrabold text-red-600 dark:text-red-400 text-sm";
 
         const monto = parseFloat(document.getElementById("inpMonto").value) || 0;
         const plazo = parseInt(document.getElementById("selPlazo").value) || 72;
-        const tea = (parseFloat(document.getElementById("inpTEA").value) || (conv.tea * 100)) / 100;
+        const teaPct = parseFloat(document.getElementById("inpTEA").value) || (conv.tea * 100);
+        const tea = teaPct / 100;
         const desgravamen = parseFloat(document.getElementById("selDesgravamen").value) || 0.000767;
+        const envioFisico = parseFloat(document.getElementById("selEnvioCta").value) || 0;
 
-        const cuota = calcularCuotaExactaConvenio(monto, plazo, tea, desgravamen, fechaDesembStr, conv);
+        const resCron = generarCronogramaYCuotaExacta(monto, plazo, tea, desgravamen, envioFisico, fechaDesembStr, conv);
+        const cuota = resCron.cuotaEvaluacion;
 
+        document.getElementById("lblPrimerVencUI").textContent = resCron.primerVencStr;
+        document.getElementById("lblTCEAUI").textContent = resCron.tceaPct.toFixed(2) + "%";
         document.getElementById("resNetoDisp").textContent = "S/ " + netoDisponible.toFixed(2);
         document.getElementById("resCuota").textContent = "S/ " + cuota.toFixed(2);
 
         evaluarDictamen(dictamenSBS, cuota, netoDisponible, cem);
         actualizarMensajeCamarguito(dictamenSBS, cuota, netoDisponible, cem);
+
+        const dictamenTexto = document.getElementById("txtResultado").textContent;
+
+        // 1. ESTAMPAR EN HOJA 1 (PLANTILLA ORIGINAL sad_page-0001.jpg)
+        document.getElementById("p_convenio").textContent = convNombre.replace(/_/g, " ");
+        document.getElementById("p_rci").textContent = (rci * 100).toFixed(0);
+        document.getElementById("p_cargo").textContent = cargo;
+        document.getElementById("p_ingresos").textContent = G15.toFixed(2);
+        document.getElementById("p_varMes").textContent = G16.toFixed(2);
+        document.getElementById("p_var3m").textContent = G17.toFixed(2);
+        document.getElementById("p_cafae").textContent = G18.toFixed(2);
+        document.getElementById("p_noConstantes").textContent = G21.toFixed(2);
+        document.getElementById("p_ley").textContent = G24.toFixed(2);
+        document.getElementById("p_disponible").textContent = disponible.toFixed(2);
+        document.getElementById("p_reserva").textContent = reservaAplicada.toFixed(2);
+        document.getElementById("p_facultativos").textContent = G29.toFixed(2);
+        document.getElementById("p_netoDisp").textContent = netoDisponible.toFixed(2);
+
+        document.getElementById("p_monto").textContent = monto.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById("p_plazo").textContent = plazo;
+        document.getElementById("p_fechaDesemb").textContent = fechaDesembStr.split("-").reverse().join("/");
+        document.getElementById("p_primerVenc").textContent = resCron.primerVencStr;
+        document.getElementById("p_tea").textContent = teaPct.toFixed(2) + "%";
+        document.getElementById("p_pgSCC").textContent = pgSCC + (pgSCC === 1 ? " mes" : " meses");
+
+        document.getElementById("p_ingresoNetoSF").textContent = baseEndeudamiento.toFixed(2);
+        document.getElementById("p_porcEndeudamiento").textContent = K58 > 0 ? (K58 * 100).toFixed(2) + "%" : "0.00%";
+        document.getElementById("p_cem").textContent = cem.toFixed(2);
+        // Ficha impresa: solo "Califica" o "Sobre endeudado", sin mostrar la cuota.
+        // "Califica" únicamente si la evaluación completa aprueba; cualquier otro resultado imprime "Sobre endeudado".
+        document.getElementById("p_dictamen").textContent = (dictamenTexto === "CALIFICA") ? "Califica" : "Sobre endeudado";
+
+        // 2. ESTAMPAR EN HOJA 2 Y PESTAÑA WEB EL MODELO EXACTO cromo_page-0001.jpg
+        const cronogramaHTML = construirHTMLCronogramaExacto(resCron, teaPct);
+        document.getElementById("cronogramaVistaWebContainer").innerHTML = cronogramaHTML;
+        document.getElementById("cronogramaPrintPage2").innerHTML = cronogramaHTML;
       }
 
       function evaluarDictamen(dictamenSBS, cuota, netoDisponible, cem) {
@@ -1702,17 +2135,27 @@
       };
 
       window.switchTab = function(tab) {
-        if (tab === 'simulador') {
-          document.getElementById("tabSimulador").classList.remove("hidden");
-          document.getElementById("tabMasivo").classList.add("hidden");
-          document.getElementById("btnTabSimulador").className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#002A8F] text-white shadow-sm transition-all duration-200 flex items-center";
-          document.getElementById("btnTabMasivo").className = "px-4 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center";
-        } else {
-          document.getElementById("tabSimulador").classList.add("hidden");
-          document.getElementById("tabMasivo").classList.remove("hidden");
-          document.getElementById("btnTabMasivo").className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#002A8F] text-white shadow-sm transition-all duration-200 flex items-center";
-          document.getElementById("btnTabSimulador").className = "px-4 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center";
+        ["Simulador", "Cronograma", "Masivo"].forEach(t => {
+          const div = document.getElementById("tab" + t);
+          const btn = document.getElementById("btnTab" + t);
+          if (t.toLowerCase() === tab) {
+            div.classList.remove("hidden");
+            btn.className = "px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#002A8F] text-white shadow-sm transition-all duration-200 flex items-center";
+          } else {
+            div.classList.add("hidden");
+            btn.className = "px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#002A8F] dark:hover:text-blue-400 transition-all duration-200 flex items-center";
+          }
+        });
+      };
+
+      window.imprimirFichaOficial = async function() {
+        recalcular();
+        const lista = await esperarPlantillaLista(8000);
+        if (!lista) {
+          const seguir = confirm("No se pudo cargar la imagen de la plantilla base (revisa tu conexión a internet).\n\n¿Imprimir de todas formas? La Hoja 1 saldría sin el fondo.");
+          if (!seguir) return;
         }
+        window.print();
       };
 
       let datosEvaluadosMasivos = [];
