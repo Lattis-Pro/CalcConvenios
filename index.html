@@ -1174,7 +1174,7 @@
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.10 Oficial (05.11.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.11 Oficial (10.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -1283,6 +1283,32 @@
   <script>
     (function () {
       "use strict";
+
+      // ============================================================
+      // PARCHE v3.11 (A): REDONDEO A 2 DECIMALES IGUAL QUE EXCEL
+      // Excel redondea "mitad hacia arriba" sobre los 15 dígitos significativos.
+      // toFixed(2) de JavaScript usa la representación binaria y fallaba por 0.01
+      // en valores como 2066.305 (Excel: 2,066.31 / JS: 2,066.30).
+      // Se aplica a todos los .toFixed(2) del archivo.
+      // ============================================================
+      const _toFixedOriginal = Number.prototype.toFixed;
+      function r2(n) {
+        n = Number(n) || 0;
+        const s = n < 0 ? -1 : 1;
+        const t = Number(Math.abs(n).toPrecision(15));
+        const txt = String(t);
+        if (txt.indexOf("e") !== -1) return s * Number(_toFixedOriginal.call(t, 2));
+        return s * Number(Math.round(Number(txt + "e2")) + "e-2");
+      }
+      Number.prototype.toFixed = function (d) {
+        return d === 2 ? _toFixedOriginal.call(r2(this), 2) : _toFixedOriginal.call(this, d);
+      };
+
+      // PARCHE v3.11 (B): Deducción extra Ejército.
+      // El Excel (Cáratula!K31) compara contra "Ejercito_del_Perú" (sin tilde), por lo que NUNCA resta los 5 soles.
+      // Se replica el resultado del Excel. Si el negocio sí requiere restar S/ 5, corregir primero la tilde en el Excel
+      // y cambiar este valor a 5.
+      const DEDUCCION_EXTRA_EJERCITO = 0;
 
       // 1. CAPA DE SEGURIDAD
       document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
@@ -1725,8 +1751,9 @@
         return `${dd}/${mm}/${yyyy}`;
       }
 
+      // PARCHE v3.11 (A): formato con miles y redondeo tipo Excel
       function fmtNum(n) {
-        return Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return r2(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       }
 
       function calcularPGSCC(convenioObj, fechaDesembStr) {
@@ -2155,6 +2182,10 @@
         const conv = CONVENIOS_DATA.find(c => c.name === convNombre) || CONVENIOS_DATA[0];
         const fechaDesembStr = document.getElementById("inpFechaDesembolso").value || "2026-10-07";
 
+        // PARCHE v3.11 (C): Hospital Sullana. El Excel compara el cargo por igualdad exacta
+        // ("Nombrados" / "Indeterminados"); includes() hacía coincidir también "CAS Indeterminados".
+        const esSullanaNombIndet = (convNombre === "Hospital_Sullana" && (cargo.trim() === "Nombrados" || cargo.trim() === "Indeterminados"));
+
         // REGLAS COMPLETAS DE RCI INTACTAS
         let rci = conv.rci;
         if (convNombre === "Policia_Nacional_del_Perú") {
@@ -2165,8 +2196,7 @@
           rci = 0.47;
         } else if (["DIRIS_Lima_Norte", "DIRIS_Lima_Centro", "DIRIS_Lima_Este", "INSN"].includes(convNombre) && cargo.includes("CAS")) {
           rci = 0.40;
-        } else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || 
-                   (convNombre === "Hospital_Sullana" && (cargo.includes("Nombrados") || cargo.includes("Indeterminados")))) {
+        } else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || esSullanaNombIndet) {
           rci = 0.45;
         } else if (["UE403_Morropon", "Hospital_Sullana", "Hospital_JAMO", "GSR_Luciano_Castillo", "Hospital_de_la_Amistad", "Hospital_Chulucanas"].includes(convNombre) && cargo.includes("CAS")) {
           rci = 0.42;
@@ -2199,7 +2229,7 @@
 
         let rciL13 = conv.rci;
         if (["DIRIS_Lima_Norte", "DIRIS_Lima_Centro", "DIRIS_Lima_Este", "INSN"].includes(convNombre) && cargo.includes("CAS")) rciL13 = 0.40;
-        else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || (convNombre === "Hospital_Sullana" && (cargo.includes("Nombrados") || cargo.includes("Indeterminados")))) rciL13 = 0.45;
+        else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || esSullanaNombIndet) rciL13 = 0.45;
         else if (convNombre === "Policia_Nacional_del_Perú" && (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda")) rciL13 = 0.40;
         else if (convNombre === "Policia_Nacional_del_Perú" && cargo === "Sub Oficial de Tercera menor a 55 años") rciL13 = 0.30;
 
@@ -2226,7 +2256,8 @@
           disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24) * rciL13;
         }
 
-        const deduccionExtra = (convNombre === "Ejército_del_Perú") ? 5 : 0;
+        // PARCHE v3.11 (B): ver DEDUCCION_EXTRA_EJERCITO (el Excel no resta los 5 soles)
+        const deduccionExtra = (convNombre === "Ejército_del_Perú") ? DEDUCCION_EXTRA_EJERCITO : 0;
         let netoDisponible = disponible - G28 - G29 - deduccionExtra;
         if (netoDisponible < 0) netoDisponible = 0;
 
@@ -2325,7 +2356,7 @@
 
         // CEM tal cual el Excel (Cáratula!G63): NO se limita a 0; si es negativo se muestra el monto real (-S/ xxx).
         const lblCEMel = document.getElementById("lblCEM");
-        lblCEMel.textContent = (cem < 0 ? "-S/ " : "S/ ") + Math.abs(cem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        lblCEMel.textContent = (cem < 0 ? "-S/ " : "S/ ") + fmtNum(Math.abs(cem));
         lblCEMel.style.color = cem < 0 ? "#ef4444" : "";
         document.getElementById("lblDictamenSBS").textContent = dictamenSBS;
         document.getElementById("lblDictamenSBS").className = dictamenSBS === "Continuar" ? "font-extrabold text-emerald-600 dark:text-emerald-400 text-sm" : "font-extrabold text-red-600 dark:text-red-400 text-sm";
@@ -2372,7 +2403,9 @@
         document.getElementById("p_tea").textContent = teaPct.toFixed(2) + "%";
         document.getElementById("p_pgSCC").textContent = pgSCC + (pgSCC === 1 ? " mes" : " meses");
 
-        document.getElementById("p_ingresoNetoSF").textContent = baseEndeudamiento.toFixed(2);
+        // PARCHE v3.11 (D): Cáratula!G61 = G15-G16+(G17*0.85)+G18-G21-G24-G29
+        const ingresoNetoSF = G15 - G16 + (G17 * 0.85) + G18 - G21 - G24 - G29;
+        document.getElementById("p_ingresoNetoSF").textContent = ingresoNetoSF.toFixed(2);
         document.getElementById("p_porcEndeudamiento").textContent = K58 > 0 ? (K58 * 100).toFixed(2) + "%" : "0.00%";
         document.getElementById("p_cem").textContent = cem.toFixed(2);
         // Ficha impresa: solo "Califica" o "Sobre endeudado", sin mostrar la cuota.
@@ -2535,7 +2568,8 @@
 
           const rci = matchConv.rci;
           const disp = (ingresos - ley) * rci;
-          const dedExtra = (matchConv.name === "Ejército_del_Perú") ? 5 : 0;
+          // PARCHE v3.11 (B): mismo criterio que la pestaña Individual (el Excel no resta los 5 soles)
+          const dedExtra = (matchConv.name === "Ejército_del_Perú") ? DEDUCCION_EXTRA_EJERCITO : 0;
           const reservaMasiva = obtenerReservaDinamica(matchConv, cargoStr);
           const neto = Math.max(0, disp - reservaMasiva - facult - dedExtra);
 
