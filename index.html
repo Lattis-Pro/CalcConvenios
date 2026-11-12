@@ -1174,7 +1174,7 @@
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.11 Oficial (10.11.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.12 Oficial (11.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -1350,7 +1350,7 @@
         }
       }
 
-      // 3. MATRIZ OFICIAL COMPLETA DE CONVENIOS (52 CONVENIOS INTACTOS)
+      // 3. MATRIZ OFICIAL COMPLETA DE CONVENIOS (incluye PSI, incorporado en el Excel "Simulador_Convenios_Desprotegido")
       const CONVENIOS_DATA = Object.freeze([
         { "name": "AGRORURAL", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 15, "reserva": 0, "tea": 0.12 },
         { "name": "ANA", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 30, "venc": 15, "reserva": 0, "tea": 0.109 },
@@ -1392,6 +1392,7 @@
         { "name": "Policia_Nacional_del_Perú", "pgBase": 2, "pfBase": 3, "rci": 0.45, "corte": 4, "venc": 15, "reserva": 0, "tea": 0.1085 },
         { "name": "PRONABEC", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 15, "reserva": 0, "tea": 0.15 },
         { "name": "PRONACEJ", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 15, "reserva": 0, "tea": 0.115 },
+        { "name": "PSI", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.135 },
         { "name": "REDIS_Chepen", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 24, "venc": 15, "reserva": 0, "tea": 0.104 },
         { "name": "Red_Salud_APLAO", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.108 },
         { "name": "RED_Salud_Arequipa_Caylloma", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.105 },
@@ -1507,7 +1508,8 @@
           "UE008 - Nombrado", "UE008 - Nombrados provisionales", "UE008 - Plazo Indeterminado", "UE008 - CAS Indeterminado",
           "UE012 - Nombrado", "UE012 - Nombrados provisionales", "UE012 - Plazo Indeterminado", "UE012 - CAS Indeterminado"
         ],
-        "UE_Salud_Cajamarca": ["Nombrados", "CAS Indeterminado"]
+        "UE_Salud_Cajamarca": ["Nombrados", "CAS Indeterminado"],
+        "PSI": ["Nombrados", "CAS Indeterminado"]
       });
 
       const TIPOS_DEUDA = Object.freeze([
@@ -2561,10 +2563,12 @@
           const monto = parseFloat(f["MONTO"] || f["Monto"] || 66900) || 0;
           const plazo = parseInt(f["PLAZO"] || f["Plazo"] || 72, 10) || 72;
 
-          const matchConv = CONVENIOS_DATA.find(c => 
-            c.name.toLowerCase().includes(convStr.toLowerCase()) || 
-            convStr.toLowerCase().includes(c.name.toLowerCase())
-          ) || CONVENIOS_DATA[14];
+          const normConv = (t) => String(t).trim().toLowerCase().replace(/\s+/g, "_");
+          const matchConv = CONVENIOS_DATA.find(c => normConv(c.name) === normConv(convStr)) ||
+            CONVENIOS_DATA.find(c =>
+              c.name.toLowerCase().includes(convStr.toLowerCase()) || 
+              convStr.toLowerCase().includes(c.name.toLowerCase())
+            ) || CONVENIOS_DATA[14];
 
           const rci = matchConv.rci;
           const disp = (ingresos - ley) * rci;
