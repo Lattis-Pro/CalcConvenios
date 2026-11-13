@@ -723,7 +723,7 @@
     <!-- Cintillo Superior Oficial BCP -->
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-pink-700 text-white text-[11px] font-semibold py-1.5 px-4 text-center tracking-wide flex justify-center items-center gap-2 shadow-inner">
       <span>✨ Alianza Oficial Convenios Públicos | Camargo Group</span>
-      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 05.11.2026</span>
+      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 13.11.2026</span>
     </div>
 
     <!-- Header Principal -->
@@ -1174,7 +1174,7 @@
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.12 Oficial (11.11.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.13 Oficial (13.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -1421,8 +1421,9 @@
           "Teniente General", "General", "Coronel", "Comandante", "Mayor", "Capitán",
           "Teniente", "Alferez", "Sub Oficial Superior", "Sub Oficial Brigadier",
           "Sub Oficial Técnico de Primera", "Sub Oficial Técnico de Segunda",
-          "Sub Oficial Técnico de Tercera", "Sub Oficial de Primera", "Sub Oficial de Segunda",
-          "Sub Oficial de Tercera", "Sub Oficial de Tercera menor a 55 años", "Personal Administrativo"
+          "Sub Oficial Técnico de Tercera", "Sub Oficial de Primera",
+          "Sub Oficial de Segunda (mayor de 8 años)", "Sub Oficial de Segunda (menor igual de 8 años)",
+          "Sub Oficial de Tercera", "Personal Administrativo"
         ],
         "Marina_de_Guerra": [
           "Vicealmirante", "Contralmirante", "Capitán de Navío", "Capitán de Fragata",
@@ -2192,7 +2193,7 @@
         let rci = conv.rci;
         if (convNombre === "Policia_Nacional_del_Perú") {
           if (cargo === "Sub Oficial de Tercera menor a 55 años") rci = 0.30;
-          else if (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda") rci = 0.40;
+          else if (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda (mayor de 8 años)") rci = 0.40;
           else rci = 0.45;
         } else if (convNombre === "UE_Salud_Cajamarca") {
           rci = 0.47;
@@ -2232,7 +2233,7 @@
         let rciL13 = conv.rci;
         if (["DIRIS_Lima_Norte", "DIRIS_Lima_Centro", "DIRIS_Lima_Este", "INSN"].includes(convNombre) && cargo.includes("CAS")) rciL13 = 0.40;
         else if ((convNombre === "RENIEC" && cargo.includes("CAS")) || esSullanaNombIndet) rciL13 = 0.45;
-        else if (convNombre === "Policia_Nacional_del_Perú" && (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda")) rciL13 = 0.40;
+        else if (convNombre === "Policia_Nacional_del_Perú" && (cargo === "Sub Oficial de Tercera" || cargo === "Sub Oficial de Segunda (mayor de 8 años)")) rciL13 = 0.40;
         else if (convNombre === "Policia_Nacional_del_Perú" && cargo === "Sub Oficial de Tercera menor a 55 años") rciL13 = 0.30;
 
         // REGLAS COMPLETAS DE DISPONIBLE INTACTAS
