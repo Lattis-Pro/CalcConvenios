@@ -723,7 +723,7 @@
     <!-- Cintillo Superior Oficial BCP -->
     <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-pink-700 text-white text-[11px] font-semibold py-1.5 px-4 text-center tracking-wide flex justify-center items-center gap-2 shadow-inner">
       <span>✨ Alianza Oficial Convenios Públicos | Camargo Group</span>
-      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 13.11.2026</span>
+      <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px]">Campaña Activa 23.11.2026</span>
     </div>
 
     <!-- Header Principal -->
@@ -1006,6 +1006,7 @@
                 <select id="selDesgravamen" class="w-full mt-1 p-2 border border-slate-300 dark:border-slate-700 rounded-xl text-xs bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#002A8F] dark:focus:ring-blue-500">
                   <option value="0.000767">Sin Retorno (0.0767%)</option>
                   <option value="0.000997">Con Retorno (0.0997%)</option>
+                  <option value="0">Endosado (0%)</option>
                 </select>
               </div>
             </div>
@@ -1174,7 +1175,7 @@
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
         <span class="font-semibold text-slate-700 dark:text-slate-300">Sistema Seguro de Simulación Financiera</span>
-        <span class="text-slate-400 dark:text-slate-500">• v3.13 Oficial (13.11.2026)</span>
+        <span class="text-slate-400 dark:text-slate-500">• v3.14 Oficial (23.11.2026)</span>
       </div>
 
       <div class="bg-slate-50 dark:bg-slate-800 px-4 py-2 rounded-xl border border-slate-200/80 dark:border-slate-700 text-center sm:text-right">
@@ -1358,8 +1359,9 @@
         { "name": "DIRIS_Lima_Centro", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 31, "venc": 15, "reserva": 50, "tea": 0.1099 },
         { "name": "DIRIS_Lima_Este", "pgBase": 1, "pfBase": 2, "rci": 0.45, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.108 },
         { "name": "DIRIS_Lima_Norte", "pgBase": 1, "pfBase": 2, "rci": 0.45, "corte": 25, "venc": 15, "reserva": 50, "tea": 0.1089 },
-        { "name": "DIRESA_Cajamarca", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.103 },
+        { "name": "DIRESA_Cajamarca", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 15, "reserva": 0, "tea": 0.103 },
         { "name": "DIRESA_Loreto", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 15, "reserva": 0, "tea": 0.108 },
+        { "name": "DIRESA_Tumbes", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.11 },
         { "name": "Ejército_del_Perú", "pgBase": 2, "pfBase": 3, "rci": 0.47, "corte": 30, "venc": 15, "reserva": 0, "tea": 0.109 },
         { "name": "EPSEL", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 15, "reserva": 0, "tea": 0.115 },
         { "name": "Fuerza_Aerea_del_Perú", "pgBase": 2, "pfBase": 3, "rci": 0.5, "corte": 30, "venc": 17, "reserva": 35, "tea": 0.111 },
@@ -1375,9 +1377,11 @@
         { "name": "Hospital_Goyeneche", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 18, "reserva": 100, "tea": 0.108 },
         { "name": "Hospital_JAMO", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.108 },
         { "name": "Hospital_la_Caleta", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 24, "venc": 15, "reserva": 0, "tea": 0.104 },
+        { "name": "Hospital_Maria_Auxiliadora", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.125 },
         { "name": "Hospital_Regional_Lambayeque", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.108 },
         { "name": "Hospital_Regional_Loreto", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 15, "reserva": 0, "tea": 0.1089 },
         { "name": "Hospital_San_Bartolome", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.12 },
+        { "name": "Hospital_Soto_Cadenillas", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.103 },
         { "name": "Hospital_Sullana", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 15, "reserva": 0, "tea": 0.108 },
         { "name": "Hospital_Trujillo", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 20, "venc": 15, "reserva": 0, "tea": 0.11 },
         { "name": "INSN", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.12 },
@@ -1387,6 +1391,7 @@
         { "name": "Ministerio_Vivienda", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 25, "venc": 17, "reserva": 0, "tea": 0.115 },
         { "name": "Ministerio_Publico", "pgBase": 2, "pfBase": 3, "rci": 0.5, "corte": 31, "venc": 17, "reserva": 0, "tea": 0.107 },
         { "name": "Mun_Cerro_Colorado", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 30, "venc": 17, "reserva": 0, "tea": 0.1149 },
+        { "name": "Municipalidad_Morropon", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.118 },
         { "name": "Municipalidad_Piura", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 23, "venc": 17, "reserva": 0, "tea": 0.117 },
         { "name": "ONPE", "pgBase": 1, "pfBase": 2, "rci": 0.5, "corte": 30, "venc": 17, "reserva": 0, "tea": 0.13 },
         { "name": "Policia_Nacional_del_Perú", "pgBase": 2, "pfBase": 3, "rci": 0.45, "corte": 4, "venc": 15, "reserva": 0, "tea": 0.1085 },
@@ -1505,12 +1510,17 @@
           "UE003 - Nombrado", "UE003 - Nombrados provisionales", "UE003 - Plazo Indeterminado", "UE003 - CAS Indeterminado",
           "UE004 - Nombrado", "UE004 - Nombrados provisionales", "UE004 - Plazo Indeterminado", "UE004 - CAS Indeterminado",
           "UE005 - Nombrado", "UE005 - Nombrados provisionales", "UE005 - Plazo Indeterminado", "UE005 - CAS Indeterminado",
+          "UE006 - Nombrado", "UE006 - Nombrados provisionales", "UE006 - Plazo Indeterminado", "UE006 - CAS Indeterminado",
           "UE007 - Nombrado", "UE007 - Nombrados provisionales", "UE007 - Plazo Indeterminado", "UE007 - CAS Indeterminado",
           "UE008 - Nombrado", "UE008 - Nombrados provisionales", "UE008 - Plazo Indeterminado", "UE008 - CAS Indeterminado",
           "UE012 - Nombrado", "UE012 - Nombrados provisionales", "UE012 - Plazo Indeterminado", "UE012 - CAS Indeterminado"
         ],
         "UE_Salud_Cajamarca": ["Nombrados", "CAS Indeterminado"],
-        "PSI": ["Nombrados", "CAS Indeterminado"]
+        "PSI": ["Nombrados", "CAS Indeterminado"],
+        "DIRESA_Tumbes": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_Maria_Auxiliadora": ["Nombrados", "CAS Indeterminado"],
+        "Hospital_Soto_Cadenillas": ["Nombrados", "CAS Indeterminado"],
+        "Municipalidad_Morropon": ["Nombrados", "Obreros", "CAS Indeterminado"]
       });
 
       const TIPOS_DEUDA = Object.freeze([
@@ -2250,7 +2260,8 @@
           disponible = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24 - (G15 * 0.08)) * rci;
         } else if (
           (["Red_Salud_Pacífico_Sur", "Red_Salud_Pacífico_Norte", "UTES_N6", "REDIS_Chepen"].includes(convNombre) && cargo.includes("CAS")) ||
-          ["DIRESA_Loreto", "Hospital_JAMO", "UE_Salud_Cajamarca"].includes(convNombre)
+          ["DIRESA_Loreto", "Hospital_JAMO", "UE_Salud_Cajamarca"].includes(convNombre) ||
+          (convNombre === "Hospital_Soto_Cadenillas" && cargo.includes("CAS"))
         ) {
           disponible = ((G15 - G16 + (G17 * 0.5) + G18 - G21) * rci) - G24;
         } else if (convNombre === "U_San_Juan_Bautista") {
@@ -2261,7 +2272,10 @@
 
         // PARCHE v3.11 (B): ver DEDUCCION_EXTRA_EJERCITO (el Excel no resta los 5 soles)
         const deduccionExtra = (convNombre === "Ejército_del_Perú") ? DEDUCCION_EXTRA_EJERCITO : 0;
-        let netoDisponible = disponible - G28 - G29 - deduccionExtra;
+        let dispParaNeto = disponible;
+        // Excel Cáratula!K31 toma M26 (se salta la fórmula propia de Hospital_Cajamarca de G26/N26)
+        if (convNombre === "Hospital_Cajamarca") dispParaNeto = (G15 - G16 + (G17 * 0.5) + G18 - G21 - G24) * rciL13;
+        let netoDisponible = dispParaNeto - G28 - G29 - deduccionExtra;
         if (netoDisponible < 0) netoDisponible = 0;
 
         let totalCuotasBCP = 0;
@@ -2368,7 +2382,8 @@
         const plazo = parseInt(document.getElementById("selPlazo").value) || 72;
         const teaPct = parseFloat(document.getElementById("inpTEA").value) || (conv.tea * 100);
         const tea = teaPct / 100;
-        const desgravamen = parseFloat(document.getElementById("selDesgravamen").value) || 0.000767;
+        const desgRaw = parseFloat(document.getElementById("selDesgravamen").value);
+        const desgravamen = isNaN(desgRaw) ? 0.000767 : desgRaw;
         const envioFisico = parseFloat(document.getElementById("selEnvioCta").value) || 0;
 
         const resCron = generarCronogramaYCuotaExacta(monto, plazo, tea, desgravamen, envioFisico, fechaDesembStr, conv);
